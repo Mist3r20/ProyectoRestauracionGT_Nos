@@ -15,10 +15,12 @@ if(!isset($_GET['controller'])){
         if(isset($_GET['action']) && method_exists($controller, $_GET['action'])){
             $action = $_GET['action'];
         }else{
-            $action = "index";
+            $action = action_default;
         }
+        $controller->$action();
     }else{
         echo $nombre_controller.' no existe';
+        header("Location:".url.'?controller=pedido');
     }
 }
 ?>
