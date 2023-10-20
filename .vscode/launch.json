@@ -8,7 +8,7 @@
             "name": "Launch Chrome",
             "request": "launch",
             "type": "chrome",
-            "url": "http://testNos.com:80/views/index.php",
+            "url": "http://testNos.com:80/index.php",
             "webRoot": "${workspaceFolder}"
         },
         {

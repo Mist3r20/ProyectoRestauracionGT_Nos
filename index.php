@@ -1,11 +1,11 @@
 <?php
 
-include_once '../controller/pedidoController.php';
-include_once '../config/parametros.php';
+include_once 'controller/pedidoController.php';
+include_once 'config/parametros.php';
 
 if(!isset($_GET['controller'])){
     // Si no se pasa nada, se mostrara pagina principal de pedidos
-    header("Location:".url.'?controller=pedido');
+    header("Location:".url.'?controller=producto');
 }else{
     $nombre_controller = $_GET['controller'].'Controller';
     if(class_exists($nombre_controller)){
@@ -20,7 +20,7 @@ if(!isset($_GET['controller'])){
         $controller->$action();
     }else{
         echo $nombre_controller.' no existe';
-        header("Location:".url.'?controller=pedido');
+        header("Location:".url.'?controller=producto');
     }
 }
 ?>
