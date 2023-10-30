@@ -1,19 +1,19 @@
 <?php
 abstract class Producto{
     
-    protected $id;
-    protected $nombre;
+    protected $ID;
+    protected $Nombre;
     protected $precio;
     protected $descripcion;
-    protected $categoria;
+    protected $nombreCategoria;
     protected $foto;
 
-    public function __construct($id, $nombre, $precio,$descripcion, $categoria, $foto){
-        $this->id = $id;
-        $this->nombre = $nombre;
+    public function __construct($ID, $Nombre, $precio,$descripcion, $nombre_categoria, $foto){
+        $this->ID = $ID;
+        $this->Nombre = $Nombre;
         $this->precio = $precio;
         $this->descripcion = $descripcion;
-        $this->categoria = $categoria;
+        $this->nombreCategoria = $nombre_categoria;
         $this->foto = $foto;
     }
 
@@ -23,7 +23,7 @@ abstract class Producto{
      */ 
     public function getId()
     {
-        return $this->id;
+        return $this->ID;
     }
 
     /**
@@ -31,9 +31,9 @@ abstract class Producto{
      *
      * @return  self
      */ 
-    public function setId($id)
+    public function setId($ID)
     {
-        $this->id = $id;
+        $this->ID = $ID;
 
         return $this;
     }
@@ -43,7 +43,7 @@ abstract class Producto{
      */ 
     public function getNombre()
     {
-        return $this->nombre;
+        return $this->Nombre;
     }
 
     /**
@@ -53,7 +53,7 @@ abstract class Producto{
      */ 
     public function setNombre($nombre)
     {
-        $this->nombre = $nombre;
+        $this->Nombre = $nombre;
 
         return $this;
     }
@@ -101,22 +101,7 @@ abstract class Producto{
     /**
      * Get the value of categoria
      */ 
-    public function getCategoria()
-    {
-        return $this->categoria;
-    }
-
-    /**
-     * Set the value of categoria
-     *
-     * @return  self
-     */ 
-    public function setCategoria($categoria)
-    {
-        $this->categoria = $categoria;
-
-        return $this;
-    }
+    
 
     /**
      * Get the value of foto
@@ -134,6 +119,26 @@ abstract class Producto{
     public function setFoto($foto)
     {
         $this->foto = $foto;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nombre_categoria
+     */ 
+    public function getNombre_categoria()
+    {
+        return $this->nombreCategoria;
+    }
+
+    /**
+     * Set the value of nombre_categoria
+     *
+     * @return  self
+     */ 
+    public function setNombre_categoria($nombre_categoria)
+    {
+        $this->nombreCategoria = $nombre_categoria;
 
         return $this;
     }
