@@ -30,8 +30,8 @@
                 <td><?=$producto->getNombre()?></td>
                 <td><?=$producto->getPrecio()?>€</td>
                 <td>
-                    <form action=url.<?="controller=producto&action=editar"?> method="POST">
-                        <input name="boton" value=<?=$producto->getID()?> hidden>
+                    <form action=<?="?controller=producto&action=editar"?> method="POST">
+                        <input name="ID" value=<?=$producto->getID()?> hidden>
                         <button type="submit">Modificar</button>
                     </form>
                 </td>
@@ -39,6 +39,12 @@
                     <form action=<?="?controller=producto&action=eliminar"?> method="POST">
                     <input name="ID" value=<?=$producto->getID()?> hidden>
                     <button type="submit">Eliminar</button>
+                    </form>
+                </td>
+                <td>
+                <form action=<?="?controller=producto&action=sel"?> method="POST">
+                        <input name="ID" value=<?=$producto->getID()?> hidden>
+                        <button type="submit">Añadir</button>
                     </form>
                 </td>
             </tr>

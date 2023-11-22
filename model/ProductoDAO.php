@@ -1,7 +1,12 @@
 <?php
 include_once 'config/DataBase.php';
-include_once 'Entrantes.php';
-include_once 'Principal.php';
+include_once 'model/Bebidas.php';
+include_once 'model/Mariscos.php';
+include_once 'model/Pizzas.php';
+include_once 'model/Postres.php';
+include_once 'model/Sandwiches.php';
+include_once 'model/Principal.php';
+include_once 'model/Entrantes.php';
 
 class ProductoDAO{
     
@@ -44,12 +49,12 @@ class ProductoDAO{
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $id);
         $stmt->execute();
-        $tipo=$stmt->get_result()->fetch_object()->tipo;
+        $tipo=$stmt->get_result()->fetch_object()->nombreCategoria;
 
 
         //Hay que hacer otra select para coger el ID_categoria del producto para sacar posteriormente el nombre 
         //de la categoria para usarla en el fetch_object de despues
-        $stmt=$con->prepare("SELECT productos.ID, productos.nombre, productos.precio, productos.descripcion, productos.foto, categoria.nombreCategoria 
+        $stmt=$con->prepare("SELECT productos.ID, productos.Nombre, productos.precio, productos.descripcion, productos.foto, categoria.nombreCategoria 
         FROM productos 
         JOIN categoria ON productos.ID_categoria = categoria.ID WHERE productos.ID = ?;");
         $stmt->bind_param("i", $id);
@@ -65,6 +70,18 @@ class ProductoDAO{
         
     }
 
+    //Creamos funcion para recoger los valores de la tabla Categorias 
+    public static function getCategorias(){
+        $con = DataBase::connect();
+        $query = "SELECT * FROM categoria";
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $con->close();
+
+        return $result;
+    }
+
     public static function deleteProduct($id){
         $con = DataBase::connect();
         $stmt = $con->prepare("DELETE FROM productos WHERE ID=?");
@@ -76,10 +93,11 @@ class ProductoDAO{
         return $result;
     }
 
-    public static function updateProduct($ID, $Nombre, $precio,  $descripcion, $nombreCategoria, $foto){ //AÑADIR LAS VARIABLES QUE PEDIRA PARA ACTUALIZR EL PRODUCTO
+    public static function updateProduct($id, $nombre, $precio,  $descripcion, $IDCategoria, $foto){ 
         $con = DataBase::connect();
-        $stmt = $con->prepare("UPDATE productos SET nombre= ?, =?, =? WHERE ID=?");
-        $stmt->bind_param("sdsi", $nombre, );
+        $stmt = $con->prepare("UPDATE productos SET nombre= ?, precio=?, descripcion=?, ID_categoria =? WHERE ID=?");
+        //FALTA AÑADIR LOS PARAMETROS SUFICIENTES PARA UPDATE DE FOTO 
+        $stmt->bind_param("sdsii", $nombre, $precio, $descripcion, $IDCategoria, $id);
 
         $stmt->execute();
         $result = $stmt->get_result();
