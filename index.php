@@ -1,10 +1,10 @@
 <?php
-
+include_once 'controller/usuarioController.php';
 include_once 'controller/productoController.php';
 include_once 'config/parametros.php';
 
 if(!isset($_GET['controller'])){
-    // Si no se pasa nada, se mostrara pagina principal de pedidos
+    // Si no se pasa nada, se mostrara pagina principal Home
     header("Location:".url.'?controller=producto');
 }else{
     $nombre_controller = $_GET['controller'].'Controller';

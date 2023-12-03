@@ -1,0 +1,135 @@
+
+/**Clases de CSS utilizadas para editar la carta*/
+.link{
+    height: 37px;
+    background-color: #e0dfd7;
+}
+
+.alineacion{
+    display: flex;
+    align-items: center;
+    padding-top: 6px;
+}
+.azul{
+    color: #3598df;
+    font-weight: lighter;
+}
+
+.fondo-carta{
+    background-color: var(--bg-color4);
+    margin-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.nombre-composicion{
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.titulo-carta{
+    padding-top: 45px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.linea-separatoria{
+    height: 20px;
+    border-bottom: 2px solid #d0d0ca;
+    margin-bottom: 25px;
+}
+
+
+.text-left{
+    text-align: left;
+}
+
+.lista-cartas{
+    margin-top: 20px;
+    justify-content: space-around;
+}
+
+.filtrar{
+    font-weight: bold;
+}
+
+.formulario-controll{
+    width: 208px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.carta{
+    max-width: 293px;
+    max-height: 336px;
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.imagen-carta{
+    max-width: 293px;
+    max-height: 171px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contenido{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.boton-carta{
+    width: 105px;
+    height: 21px;
+    align-items: center;
+    background-color: var(--bg-button);
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 2px;
+    border: none;
+}
+
+.boton-carta:hover{
+    background-color: var(--bg-buttonH);
+}
+
+.desde{
+    font-size: 12px;
+}
+
+.precio{
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.iva{
+    font-size: 11px;
+}
+
+.titulo-producto{
+    font-weight: bold;
+    font-size: 16px;
+}

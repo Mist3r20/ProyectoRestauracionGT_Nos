@@ -1,0 +1,762 @@
+@charset "utf-8";
+/* Codigo CSS para clases genericas y comunes de las paginas de la web */
+
+/* FONTS */
+@font-face {
+    font-family: "BlantickScript";
+    src: url(../fonts/BlantickScript.ttf);
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+/*Variables CSS*/
+:root {
+    /* --main-bg-color: brown; */
+    --bg-color1: #252525;
+    --bg-color2: #FFED00;
+    --bg-color3: #FBED72;
+    --bg-color4: #F1F1EA;
+    --bg-color5: #72D0EB;
+    --bg-button: #FFA43D;
+    --bg-buttonH: #EF942D;
+    --bg-colorTS: #4A4A4A;
+    --bg-colorFooter: #333333;
+}
+
+
+/*Media query*/
+/** Codigo para uso responsive*/
+@media only screen and (max-width: 600px) {
+    /* body {
+      background-color: lightblue;
+    } */
+
+    .small-article {
+        width: 100%; 
+    }
+
+   
+}
+
+.container{
+    max-width: 1440px;
+    margin: auto;
+}
+
+.categoriasNAV{
+    display: inline-flex;
+    align-items: center;
+}
+
+.mb-30{
+    margin-bottom: 30px;
+}
+.mt-20{
+    margin-top: 20px;
+}
+
+.mb-70{
+    margin-bottom: 70px;
+}
+
+.pb-30{
+    padding-bottom: 30px;
+}
+
+.pt-30{
+    padding-top: 30px;
+}
+
+.pb-20{
+    padding-bottom: 20px;
+}
+
+
+/**NAV SUPERIOR EN HORIZONTAL*/
+.menu{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.custom-nav{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    margin: auto;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.custom-nav-item{
+    display: flex;
+    width: 126px;
+}
+
+.custom-nav-item>a { 
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 126px;
+    color: black;
+}
+
+.custom-nav-item>a:hover{
+    background-color: var(--bg-color4);
+}
+
+.custom-image{
+    width: 43px;
+    height: 45px;
+    
+}
+
+.custom-text{
+    width: 83px;
+    text-align: center;
+}
+
+
+
+
+/**SECCION 1*/
+.seccionesMAX1{
+    max-width: 1170px;
+    margin: auto;
+}
+
+.seccionesMAX1{
+    max-width: 1170px;
+    margin: auto;
+}
+
+.titulo-seccion1{
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--bg-colorTS);
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.large-article{
+    height: 400px;
+    background-size: cover;
+    background-position: center center;
+    padding-left: 15px;
+    padding-top: 30px;
+    
+}
+
+.small-article{
+    height: 195px;
+    background-size: cover;
+    background-position: center center;
+    padding-left: 15px;
+    padding-top: 30px;
+}
+
+
+
+.article1{
+    background-image: url('../images/ImagenesCategoriasDestacadas/Tartaletas_Champis_Queso.png');
+}
+
+.article2{
+    background-image: url('../images/ImagenesCategoriasDestacadas/Croquetas_jamon.png');
+}
+
+.article3{
+    background-image: url('../images/ImagenesCategoriasDestacadas/flatbread.png');
+}
+
+.article4{
+    background-image: url('../images/ImagenesCategoriasDestacadas/pizza.png');
+}
+
+.article5{
+    background-image: url('../images/ImagenesCategoriasDestacadas/crepes.png');
+}
+
+.article6{
+    background-image: url('../images/ImagenesCategoriasDestacadas/Flan_caramelo.png');
+}
+
+.col-md-3{
+    width: 285px;
+}
+
+.content{
+    color: white;
+}
+
+.redirect-button{
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: var(--bg-button);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.redirect-button:hover{
+    background-color: var(--bg-buttonH);
+}
+div > h3{
+    font-size: 24px;
+    font-weight: normal;
+}
+div > p{
+    margin: 0px;
+}
+
+p > span{
+    font-weight: bold;
+}
+
+
+
+/**SECCION 2*/
+.fondo-seccion2{
+    background-color: var(--bg-color4);
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.seccionesMAX2{
+    max-width: 1140px;
+    margin: auto;
+}
+
+.titulo-seccion2{
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--bg-colorTS);
+    margin-bottom: 0px;
+}
+
+.section-button {
+    font-size: 14px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.card-button{
+    padding: 6px 12px;
+    background-color: var(--bg-button);
+    color: white;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 35px;
+    margin-top: 17px;
+    letter-spacing: 2px;
+}
+
+.card-button:hover{
+    background-color: var(--bg-buttonH);
+}
+
+.card-title{
+    margin: auto;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.card{
+    border-radius: 0;
+}
+
+.card-text{
+    font-size: 12px;
+}
+
+
+/**Seccion 3*/
+
+.titulo-seccion3{
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--bg-colorTS);
+    margin-bottom: 0px;
+}
+
+.comment-section{
+    margin-top: 20px;
+}
+
+
+.carousel-inner img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.rating{
+    font-size: 28px;
+    color: #ffe900; /*Amarillo*/
+    text-align: center;
+}
+
+.rating .star{
+    cursor: pointer;
+}
+
+.rating .star-empty {
+    color: #ccc; /* Gris */
+}
+
+.review-text{
+    height: 112px;
+    word-wrap: break-word;
+    font-size: 15px;
+    text-align: center;
+}
+
+
+
+/**Banner*/
+.enlace-banner{
+    display: block;
+    width: 100%;
+    margin: auto;
+}
+.espacio-banner{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+/**Footer*/
+
+.footer-color{
+    background-color: var(--bg-colorFooter);
+    color: white;
+    padding: 50px;
+}
+
+.imagenes{
+    max-width: 112px;
+}
+
+.pago-b{
+    padding-bottom: 40px;
+}
+.redes{
+    margin-bottom: 70px;
+    justify-content: center;
+}
+
+.row-redes{
+    height: 28px;
+}
+
+.col-3-redes{
+    width: 70px;
+}
+
+.icono{
+    width: 28px;
+    height: 28px;
+    display: flex;
+    overflow: hidden;
+}
+
+
+.facebook{
+    background-image: url(/assets/images/Footer/facebook.png);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.facebook:hover{
+    background-image: url(/assets/images/Footer/facebookHover.png);
+}
+
+.twitter{
+    background-image: url(/assets/images/Footer/twitter.png);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.twitter:hover{
+    background-image: url(/assets/images/Footer/twitterHover.png);
+}
+
+.instagram{
+    background-image: url(/assets/images/Footer/instagram.png);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.instagram:hover{
+    background-image: url(/assets/images/Footer/instagramHover.png);
+}
+
+.gt{
+    background-image: url(/assets/images/Footer/GT.png);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+}
+
+.gt:hover{
+    background-image: url(/assets/images/Footer/GTHover.png);
+}
+
+.copy{
+    margin-bottom: 20px;
+}
+/** Header */
+.color-header{
+    background-color: var(--bg-color1);
+}
+
+.nav-link{
+    font-weight: lighter;
+}
+
+.btn{
+    border: none;
+    cursor: pointer;
+}
+
+.icon{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.icon.search{
+    background-image: url(/assets/icons/lupa.png);
+}
+
+.btn:hover .icon.search{
+    background-image: url(/assets/icons/lupaHover.png);
+}
+
+.icon.comprar{
+    background-image: url(/assets/icons/carro.png);
+}
+
+.btn:hover .icon.comprar{
+    background-image: url(/assets/icons/carroHover.png);
+}
+
+.icon.usuario{
+    background-image: url(/assets/icons/usuario.png);
+}
+
+.btn:hover .icon.usuario{
+    background-image: url(/assets/icons/usuarioHover.png);
+}
+
+.nav-link{
+    color: white;
+}
+
+.nav-link:hover{
+    color: #FBED72;
+}
+
+.navbar-toggler{
+    border-color: white;
+}
+.navbar-toggler-icon {
+    filter: invert(1); 
+}
+
+.icon.comprar.has-items {
+    position: relative;
+}
+
+/*::after hace que todo el contenido de diseño se aplique despues de icon.comprar.has-items*/
+.icon.comprar.has-items::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: orange;
+}
+
+/**CARTA*/
+.link{
+    height: 37px;
+    background-color: #e0dfd7;
+}
+
+.alineacion{
+    display: flex;
+    align-items: center;
+    padding-top: 6px;
+}
+.azul{
+    color: #3598df;
+    font-weight: lighter;
+}
+
+.fondo-carta{
+    background-color: var(--bg-color4);
+    margin-bottom: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.nombre-composicion{
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.titulo-carta{
+    padding-top: 45px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.linea-separatoria{
+    height: 20px;
+    border-bottom: 2px solid #d0d0ca;
+    margin-bottom: 25px;
+}
+
+
+.text-left{
+    text-align: left;
+}
+
+.lista-cartas{
+    margin-top: 20px;
+    justify-content: space-around;
+}
+
+.filtrar{
+    font-weight: bold;
+}
+
+.formulario-controll{
+    width: 208px;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.carta{
+    max-width: 293px;
+    max-height: 336px;
+    align-items: center;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+}
+
+.imagen-carta{
+    max-width: 293px;
+    max-height: 171px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imagen{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contenido{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.boton-carta{
+    width: 105px;
+    height: 21px;
+    align-items: center;
+    background-color: var(--bg-button);
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 2px;
+    border: none;
+}
+
+.boton-carta:hover{
+    background-color: var(--bg-buttonH);
+}
+
+.desde{
+    font-size: 12px;
+}
+
+.precio{
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.iva{
+    font-size: 11px;
+}
+
+.titulo-producto{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/**CARRITO*/
+
+.titulo-carrito{
+    font-weight: 700;
+    font-size: 20px;
+    padding: 20px 0;
+}
+
+.producto{
+    margin-bottom: 30px;
+    align-items: center;
+}
+
+.imagen-producto{
+    max-width: 100px;
+    max-height: 56px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nombre-producto{
+    font-size: 16px;
+    padding: 5px;
+    color: #4A4A4A;
+}
+
+.unidades{
+    font-weight: bolder;
+}
+
+.button-unidades{
+    border: 0.5px solid #d3d3d3;
+    background-color: #fff;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    font-weight: bolder;
+    text-align: center;
+    font-size: 14px;
+}
+
+.linea-separatoria2{
+    height: 2px;
+    background-color: #000;
+    margin-top: 0px;
+    opacity: 1;
+}
+
+.eliminar{
+    font-size: 13px;
+    font-family: open sans,sans-serif;
+    letter-spacing: 2px;
+    color: #000;
+    background-color: #f1f1ea;
+    font-weight: bold;
+}
+
+.carrito-lleno{
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 7px;
+    font-size: 15px;
+    border: 1px solid #eee;
+    border-radius: 7px;
+    margin-top: 60px;
+    max-width: 360px;
+    height: fit-content;
+}
+
+.carrito-iva{
+    padding: 5px 0 0;
+}
+
+.carrito-gastos-envio{
+    color: #7ed321;
+    font: 700;
+    padding: 5px 0;
+}
+
+.postal{
+    color:grey;
+    font-weight:normal;
+    font-size: 12px;
+    display: block;
+}
+
+.linea-separatoria-negra{
+    height: 15px;
+    border-bottom: 2px solid #000;
+    margin-bottom: 15px
+}
+
+.carrito-total{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.btn-ver-cesta{
+    margin-top: 20px;
+}
+
+.button-finalizar{
+    font-size: 13px;
+    letter-spacing: 2px;
+    color: #fff!important;
+    background-color: var(--bg-button);
+    width: 318px;
+}
+
+.button-finalizar:hover{
+    background-color: var(--bg-buttonH);
+}
+
+.align-precios{
+    display: flex;
+    justify-content: center;
+}
+
+
+

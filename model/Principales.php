@@ -2,7 +2,7 @@
 include_once 'Producto.php';
 
 
-class Principal extends Producto{
+class Principales extends Producto{
 
     public function __construct(){
         

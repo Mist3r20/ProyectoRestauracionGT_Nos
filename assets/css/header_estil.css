@@ -1,0 +1,68 @@
+/**Clases de CSS utilizadas para editar el Header de la pagina*/
+.color-header{
+    background-color: var(--bg-color1);
+}
+
+.nav-link{
+    font-weight: lighter;
+}
+
+.btn{
+    border: none;
+    cursor: pointer;
+}
+
+.icon{
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.icon.search{
+    background-image: url(/assets/icons/lupa.png);
+}
+
+.btn:hover .icon.search{
+    background-image: url(/assets/icons/lupaHover.png);
+}
+
+.icon.comprar{
+    background-image: url(/assets/icons/carro.png);
+}
+
+.btn:hover .icon.comprar{
+    background-image: url(/assets/icons/carroHover.png);
+}
+
+.nav-link{
+    color: white;
+}
+
+.nav-link:hover{
+    color: #FBED72;
+}
+
+.navbar-toggler{
+    border-color: white;
+}
+.navbar-toggler-icon {
+    filter: invert(1); 
+}
+
+.icon.comprar.has-items {
+    position: relative;
+}
+
+/*::after hace que todo el contenido de diseño se aplique despues de icon.comprar.has-items*/
+.icon.comprar.has-items::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: orange;
+}

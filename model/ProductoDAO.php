@@ -5,8 +5,9 @@ include_once 'model/Mariscos.php';
 include_once 'model/Pizzas.php';
 include_once 'model/Postres.php';
 include_once 'model/Sandwiches.php';
-include_once 'model/Principal.php';
+include_once 'model/Principales.php';
 include_once 'model/Entrantes.php';
+include_once 'model/Comentario.php';
 
 class ProductoDAO{
     
@@ -20,6 +21,7 @@ class ProductoDAO{
         $stmt->bind_param("s", $tipo);
         $stmt->execute();
         $result = $stmt->get_result();
+        $productos = [];
         while($row = $result->fetch_object($tipo)){
             $productos[] = $row;
         }
@@ -30,15 +32,8 @@ class ProductoDAO{
     public static function getAllProducts(){
         $con = DataBase::connect();
         
-        $query = "SELECT productos.ID, productos.Nombre, productos.precio, productos.descripcion, productos.foto, categoria.nombreCategoria 
-        FROM productos 
-        JOIN categoria ON productos.ID_categoria = categoria.ID";
-        $stmt = $con->prepare($query);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        while($row = $result->fetch_object('')){
-            $allproductos[] = $row;
-        }
+        $allproductos = array_merge(ProductoDAO::getAllProductsType('Entrantes'),ProductoDAO::getAllProductsType('Principales'),ProductoDAO::getAllProductsType('Pizzas'), ProductoDAO::getAllProductsType('Sandwiches'),ProductoDAO::getAllProductsType('Mariscos'), ProductoDAO::getAllProductsType('Postres'),ProductoDAO::getAllProductsType('Bebidas'));
+        
         return $allproductos;
     }
 
@@ -52,8 +47,7 @@ class ProductoDAO{
         $tipo=$stmt->get_result()->fetch_object()->nombreCategoria;
 
 
-        //Hay que hacer otra select para coger el ID_categoria del producto para sacar posteriormente el nombre 
-        //de la categoria para usarla en el fetch_object de despues
+        
         $stmt=$con->prepare("SELECT productos.ID, productos.Nombre, productos.precio, productos.descripcion, productos.foto, categoria.nombreCategoria 
         FROM productos 
         JOIN categoria ON productos.ID_categoria = categoria.ID WHERE productos.ID = ?;");
@@ -104,5 +98,40 @@ class ProductoDAO{
 
         return $result;
     }
+
+    public static function getProductsNovedad(){
+        $tipo = 'Pizzas';
+        $con = DataBase::connect();
+        //EJEMPLO
+        $query = "SELECT productos.ID, productos.Nombre, productos.precio, productos.descripcion, productos.foto, categoria.nombreCategoria 
+        FROM productos 
+        JOIN categoria ON productos.ID_categoria = categoria.ID WHERE categoria.nombreCategoria = ?;";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("s", $tipo);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $productosNov = [];
+        while($row = $result->fetch_object($tipo)){
+            $productosNov[] = $row;
+        }
+        return $productosNov;
+    }
+
+    public static function getComentariosPrincipal(){
+        
+        $con = DataBase::connect();
+        //EJEMPLO
+        $query = "SELECT comentarios.ID, comentarios.ID_usuario, comentarios.calificacion, comentarios.texto FROM comentarios";
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $comentario = [];
+        while($row = $result->fetch_object('Comentario')){
+            $comentario[] = $row;
+        }
+        return $comentario;
+    }
+
+    
 }
 ?>
