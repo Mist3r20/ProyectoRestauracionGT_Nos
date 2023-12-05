@@ -14,6 +14,8 @@ include_once 'model/Comentario.php';
 // Creamos el controlador de pedidos
 
 class productoController{
+
+    //Funcion index la cual recogera la pagina HOME de la pagina 
     public function index(){
 
 
@@ -33,11 +35,17 @@ class productoController{
         include 'views/header.php';
         //panel
         include_once 'views/home.php';
+        if(isset($_COOKIE['UltimoPedido'])){
+            echo 'Tu ultimo pedido fue de '.$_COOKIE['UltimoPedido'].'€';
+            setcookie("UltimoPedido",'',time()-3600);
+        }
         //fotter
         include_once 'views/footer.php';
     
     }
 
+
+    //Funcion sel la cual sera la encargada de añadir el producto a la array de session
     public function sel(){
         //Creamos e iniciamos una session
         session_start();
@@ -79,10 +87,14 @@ class productoController{
     
     }
 
+    //Funcion que mostrara la carta de la pagina web con los productos que se deseen ver
     public function carta(){
 
+        //comprobamos la categoria seleccionada en el select de la pagina, o del submenu de las paginas, sino se ha seleccionada niguna categoria
+        //mostrara todos los productos
         if(isset($_POST['categoriaSelect'])){
             $categoria = $_POST['categoriaSelect'];
+            //si el valor es todos motrara todos los productos, sino mostrara los productos de una misma categoria seleccionada
             if($categoria === 'Todos'){
                 $allProducts = ProductoDAO::getAllProducts();
             }else{
@@ -105,11 +117,12 @@ class productoController{
         include_once 'views/header.php';
         //panel
         include_once 'views/carta.php';
-
+        //footer
         include_once 'views/footer.php';
 
     }
 
+    //funcion que contiene el carrito de la pagina web
     public function carrito(){
 
         session_start();
@@ -143,11 +156,15 @@ class productoController{
             header("Location:".url.'?controller=producto&action=index');
         }
         
+        //header
         include_once 'views/header.php';
+        //carrito
         include_once 'views/carrito.php';
+        //footer
         include_once 'views/footer.php';
     }
 
+    //funcion que se usara para eliminar un producto con el id
     public function eliminar(){
         //echo "Producto a eliminar";
         if(isset($_POST['ID'])){
@@ -159,6 +176,7 @@ class productoController{
         header("Location:".url.'?controller=producto');
     }
     
+    //funcion para editar un producto
     public function editar(){
         if(isset($_POST['ID'])){
             $id_producto=$_POST['ID'];
@@ -171,6 +189,7 @@ class productoController{
         }
     }
 
+    //function que recoge y pasa los valores del producto a actualizar y los manda a updateProduct en ProductoDAO
     public function actualizar(){
         if(isset($_POST['id_producto']) && isset($_POST['nombre']) && isset($_POST['precio']) && isset($_POST['descripcion'])){
             $id = $_POST['id_producto'];
@@ -186,5 +205,19 @@ class productoController{
         header("Location:".url.'?controller=producto');
     }
     
+    //Funcion confirmar sera la que suba el pedido uan vez finalizado a la base de datos
+    public function confirmar(){
+        session_start();
+        //Te almacena el pedido en la base de datos Pedido DAO que guarda el pedido en la base de datos
+        
+        //Guardo la cookie
+        setcookie("Ultimo pedido",$_POST['cantidadFinal'],time()+3600);
+
+        //Borramos sesion de pedido
+        unset($_SESSION['selecciones']);
+
+        //Redirigimos a la pagina principal
+        header("Location:".url.'?controller=producto');
+    }
 }
 ?>

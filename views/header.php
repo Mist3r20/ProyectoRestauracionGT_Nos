@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/full_estil.css" rel="stylesheet" type="text/css" media="screen">
     <link href="../assets/css/header_estil.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="../assets/css/full_estil.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    
     <title>Header</title>
 </head>
 <body>
@@ -18,10 +19,10 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="?controller=producto">Inicio</a>
+                <a class="nav-link link-color" aria-current="page" href="?controller=producto">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="<?=url."?controller=producto&action=carta"?>">Carta</a>
+                <a class="nav-link link-color" href="<?=url."?controller=producto&action=carta"?>">Carta</a>
               </li>
             </ul>
             <form class="d-flex" role="search">

@@ -1,4 +1,5 @@
 <?php
+//Clase Producto padre que tiene las variables y valores necesarios de un producto en la base de datos
 abstract class Producto{
     
     protected $ID;

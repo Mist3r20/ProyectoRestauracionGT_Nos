@@ -9,8 +9,10 @@ include_once 'model/Principales.php';
 include_once 'model/Entrantes.php';
 include_once 'model/Comentario.php';
 
+//Clase que tratara todas las funciones que usaran consultas SQL para tratar con el servidor
 class ProductoDAO{
-    
+
+    //Funcion que buscara en la base de datos todos los productos que sean de una misma categoria
     public static function getAllProductsType($tipo){
         $con = DataBase::connect();
         //EJEMPLO
@@ -28,7 +30,7 @@ class ProductoDAO{
         return $productos;
     }
 
-    
+    //Funcion que buscara en la base de datos todos los productos de la base de datos
     public static function getAllProducts(){
         $con = DataBase::connect();
         
@@ -37,6 +39,7 @@ class ProductoDAO{
         return $allproductos;
     }
 
+    //Funcion que buscara en la base de datos solo un unico producto recogiendo el ID de este
     public static function getProductById($id){
         $con = DataBase::connect();
         
@@ -48,7 +51,7 @@ class ProductoDAO{
 
 
         
-        $stmt=$con->prepare("SELECT productos.ID, productos.Nombre, productos.precio, productos.descripcion, productos.foto, categoria.nombreCategoria 
+        $stmt=$con->prepare("SELECT productos.ID, productos.Nombre, productos.precio, productos.descripcion, productos.foto
         FROM productos 
         JOIN categoria ON productos.ID_categoria = categoria.ID WHERE productos.ID = ?;");
         $stmt->bind_param("i", $id);
@@ -76,6 +79,7 @@ class ProductoDAO{
         return $result;
     }
 
+    //Funcion para eliminar un producto mediante la ID
     public static function deleteProduct($id){
         $con = DataBase::connect();
         $stmt = $con->prepare("DELETE FROM productos WHERE ID=?");
@@ -86,7 +90,8 @@ class ProductoDAO{
 
         return $result;
     }
-
+    
+    //Funcion para editar un producto 
     public static function updateProduct($id, $nombre, $precio,  $descripcion, $IDCategoria, $foto){ 
         $con = DataBase::connect();
         $stmt = $con->prepare("UPDATE productos SET nombre= ?, precio=?, descripcion=?, ID_categoria =? WHERE ID=?");
@@ -99,6 +104,7 @@ class ProductoDAO{
         return $result;
     }
 
+    //Funcion para recoger productos de la base de datos que seran las novedades
     public static function getProductsNovedad(){
         $tipo = 'Pizzas';
         $con = DataBase::connect();
@@ -117,6 +123,7 @@ class ProductoDAO{
         return $productosNov;
     }
 
+    //Funcion que cogera los comentarios de la pagina principal
     public static function getComentariosPrincipal(){
         
         $con = DataBase::connect();

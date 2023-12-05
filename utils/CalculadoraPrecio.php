@@ -1,6 +1,9 @@
 <?php
+
+//Clase de calculadora que hara los calculos necesarios para realizar el pedido 
 class calculadoraPrecios{
     
+    //Funcion que saca el precio base de todos los productos añadidos a la array de session
     public static function calculadorPrecioPedido($pedidos){
         $precioTotal = 0;
     
@@ -14,6 +17,7 @@ class calculadoraPrecios{
         return number_format($precioTotal, 2, '.', ',');
     }
 
+    //Funcion que saca el IVA de todos los productos añadidos a la array de session
     public static function calculaIVAPedido($pedidos){
         $ivaTotal = 0;
     
@@ -28,6 +32,7 @@ class calculadoraPrecios{
         return number_format($ivaTotal, 2, '.', ',');
     }
     
+    //Funcion que saca el precio TOTAL del pedido sumando el precio base + el IVA de la array de session
     public static function calculadorTotalPedido($pedidos){
         $precioTotal = 0;
         $ivaTotal = 0;

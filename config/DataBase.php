@@ -1,5 +1,5 @@
 <?php
-
+//Clase que hace conexion a la base de datos
 class DataBase{
     public static function connect($host= 'localhost', $user='root', $password='', $db='gt_bbdd'){
         $con = new mysqli($host,$user,$password,$db);

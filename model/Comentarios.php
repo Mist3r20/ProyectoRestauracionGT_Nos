@@ -1,6 +1,6 @@
 <?php
 
-
+    //Clase abtracta y padre de Comentarios que tiene los valores que tiene un comentario en la base de datos
     abstract class Comentarios{
 
         protected $id;

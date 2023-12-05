@@ -1,7 +1,7 @@
 <?php
 include_once 'Producto.php';
 
-
+//Clase principaples que hereda de Producto
 class Principales extends Producto{
 
     public function __construct(){
@@ -9,13 +9,5 @@ class Principales extends Producto{
     }
 
     
-    /**public function calculaPrecioTotal($numDias){
-        $precioTotal = $numDias * self::PRECIOBEBIDA;
-        return $precioTotal;
-    }
-
-    public function devuelvePrecioDia(){
-        return self::PRECIOBEBIDA;
-    }*/
 }
 ?>

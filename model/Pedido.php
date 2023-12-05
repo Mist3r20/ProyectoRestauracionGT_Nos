@@ -1,5 +1,6 @@
 <?php
 
+        //Clase Pedido que tiene los productos que se añaden al carrito
     class Pedido{
     
         private $producto;

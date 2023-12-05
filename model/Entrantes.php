@@ -1,7 +1,7 @@
 <?php
 include_once 'Producto.php';
 
-
+//Clase entrantes que hereda de Producto
 class Entrantes extends Producto{
 
     public function __construct(){

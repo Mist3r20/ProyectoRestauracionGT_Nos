@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/full_estil.css" rel="stylesheet" type="text/css" media="screen">
     <link href="../assets/css/carrito_estil.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="../assets/css/full_estil.css" rel="stylesheet" type="text/css" media="screen">
+    
     <title>Carrito</title>
 </head>
 <body>
@@ -28,7 +29,7 @@
                 </div>
               </div> 
               <div class="col-md-10">
-                <div class="row">
+                <div class="row linea-separatoria2">
                   <div class="col-7">
                     <p class="nombre-producto"><?=$pedido->getProducto()->getNombre()?></p>
                   </div>
@@ -41,11 +42,6 @@
                   </div>
                   <div class="col-2 text-right">
                     <p class="nombre-producto"><?= number_format($pedido->devuelvePrecio(),2)?>€</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12">
-                  <hr class="linea-separatoria2">
                   </div>
                 </div>
                 <div class="row">
@@ -106,6 +102,7 @@
             <div class="col-12">
               <div class="btn-ver-cesta text-center">
                 <form action=<?="?controller=producto&action=confirmar"?> method="POST">
+                  <input type="hidden" name="cantidadFinal" value=<?=calculadoraPrecios::calculadorTotalPedido($_SESSION['selecciones'])?>>
                   <button type="submit" class="btn button-finalizar">FINALIZAR</button>
                 </form>
               </div>
