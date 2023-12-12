@@ -11,32 +11,28 @@ include_once 'model/Pedido.php';
 include_once 'utils/CalculadoraPrecio.php';
 include_once 'model/Comentario.php';
 
+//Realizamos include de este archivo para comprobar si esta iniciada o no la session
+include 'utils/session_init.php';
+
 // Creamos el controlador de pedidos
 
 class productoController{
 
     //Funcion index la cual recogera la pagina HOME de la pagina 
     public function index(){
-
-
-        //Creamos e iniciamos una session
-        session_start();
-
-        if(!isset($_SESSION['selecciones'])){
-            $_SESSION['selecciones'] = array();
-        }
-        
-    
         
         // Verificar si $_SESSION['selecciones'] tiene elementos
         $tieneElementos = !empty($_SESSION['selecciones']);
-    
+        
         //cabecera
         include 'views/header.php';
+        
         //panel
         include_once 'views/home.php';
-        if(isset($_COOKIE['UltimoPedido'])){
-            echo 'Tu ultimo pedido fue de '.$_COOKIE['UltimoPedido'].'€';
+
+        //creamos cookie
+        if(isset($_COOKIE['Ultimopedido'])){
+            echo 'Tu ultimo pedido fue de '.$_COOKIE['Ultimopedido'].'€';
             setcookie("UltimoPedido",'',time()-3600);
         }
         //fotter
@@ -45,12 +41,85 @@ class productoController{
     }
 
 
-    //Funcion sel la cual sera la encargada de añadir el producto a la array de session
-    public function sel(){
-        //Creamos e iniciamos una session
-        session_start();
+    //Funcion que mostrara la carta de la pagina web con los productos que se deseen ver
+    public function carta(){
+        
+
+        //comprobamos la categoria seleccionada en el select de la pagina, o del submenu de las paginas, sino se ha seleccionada niguna categoria
+        //mostrara todos los productos
+        if(isset($_POST['categoriaSelect'])){
+            $categoria = $_POST['categoriaSelect'];
+            //si el valor es todos motrara todos los productos, sino mostrara los productos de una misma categoria seleccionada
+            if($categoria === 'Todos'){
+                $allProducts = ProductoDAO::getAllProducts();
+            }else{
+                $allProducts = ProductoDAO::getAllProductsType($categoria);
+            }
+        }elseif(isset($_GET['categoria'])){
+            $categoria = $_GET['categoria'];
+            $allProducts = ProductoDAO::getAllProductsType($categoria);
+        }else{
+            $allProducts = ProductoDAO::getAllProducts();
+            $categoria = 'Todas categorias';
+        }
 
         
+
+        // Verificar si $_SESSION['selecciones'] tiene elementos
+        $tieneElementos = !empty($_SESSION['selecciones']);
+
+        //cabecera
+        include_once 'views/header.php';
+        //panel
+        include_once 'views/carta.php';
+        //footer
+        include_once 'views/footer.php';
+
+    }
+
+    //funcion que contiene el carrito de la pagina web
+    public function carrito(){
+
+        if(isset($_POST['Add'])){
+            //Añadimos producto
+            $pedido = $_SESSION['selecciones'][$_POST['Add']];
+            $pedido->setCantidad($pedido->getCantidad()+1);
+        }else if(isset($_POST['Del'])){
+
+            $pedido = $_SESSION['selecciones'][$_POST['Del']];
+            if($pedido->getCantidad() == 1){
+                unset($_SESSION['selecciones'][$_POST['Del']]);
+                //Re-Indexamos el Array selecciones
+                $_SESSION['selecciones'] = array_values($_SESSION['selecciones']);
+            }else{
+                $pedido->setCantidad($pedido->getCantidad()-1);
+            }
+        
+        }
+        if(isset($_POST['eliminar'])){
+            unset($_SESSION['selecciones'][$_POST['eliminar']]);
+            //Re-Indexamos el Array selecciones
+            $_SESSION['selecciones'] = array_values($_SESSION['selecciones']);
+        }
+
+        if(count($_SESSION['selecciones']) == 0){
+            header("Location:".url.'?controller=producto&action=index');
+        }
+        
+        //header
+        include_once 'views/header.php';
+        
+        //carrito
+        include_once 'views/carrito.php';
+        //footer
+        include_once 'views/footer.php';
+
+    }
+
+    
+    //Funcion sel la cual sera la encargada de añadir el producto a la array de session
+    public function sel(){
+       
 
         if (isset($_POST['ID'])) {
             $productoId = $_POST['ID'];
@@ -85,83 +154,6 @@ class productoController{
         }
 
     
-    }
-
-    //Funcion que mostrara la carta de la pagina web con los productos que se deseen ver
-    public function carta(){
-
-        //comprobamos la categoria seleccionada en el select de la pagina, o del submenu de las paginas, sino se ha seleccionada niguna categoria
-        //mostrara todos los productos
-        if(isset($_POST['categoriaSelect'])){
-            $categoria = $_POST['categoriaSelect'];
-            //si el valor es todos motrara todos los productos, sino mostrara los productos de una misma categoria seleccionada
-            if($categoria === 'Todos'){
-                $allProducts = ProductoDAO::getAllProducts();
-            }else{
-                $allProducts = ProductoDAO::getAllProductsType($categoria);
-            }
-        }elseif(isset($_GET['categoria'])){
-            $categoria = $_GET['categoria'];
-            $allProducts = ProductoDAO::getAllProductsType($categoria);
-        }else{
-            $allProducts = ProductoDAO::getAllProducts();
-            $categoria = 'Todas categorias';
-        }
-
-        session_start();
-
-        // Verificar si $_SESSION['selecciones'] tiene elementos
-        $tieneElementos = !empty($_SESSION['selecciones']);
-
-        //cabecera
-        include_once 'views/header.php';
-        //panel
-        include_once 'views/carta.php';
-        //footer
-        include_once 'views/footer.php';
-
-    }
-
-    //funcion que contiene el carrito de la pagina web
-    public function carrito(){
-
-        session_start();
-        // Verificar si $_SESSION['selecciones'] tiene elementos
-        $tieneElementos = !empty($_SESSION['selecciones']);
-
-        
-        if(isset($_POST['Add'])){
-            //Añadimos producto
-            $pedido = $_SESSION['selecciones'][$_POST['Add']];
-            $pedido->setCantidad($pedido->getCantidad()+1);
-        }else if(isset($_POST['Del'])){
-
-            $pedido = $_SESSION['selecciones'][$_POST['Del']];
-            if($pedido->getCantidad() == 1){
-                unset($_SESSION['selecciones'][$_POST['Del']]);
-                //Re-Indexamos el Array selecciones
-                $_SESSION['selecciones'] = array_values($_SESSION['selecciones']);
-            }else{
-                $pedido->setCantidad($pedido->getCantidad()-1);
-            }
-        
-        }
-        if(isset($_POST['eliminar'])){
-            unset($_SESSION['selecciones'][$_POST['eliminar']]);
-            //Re-Indexamos el Array selecciones
-            $_SESSION['selecciones'] = array_values($_SESSION['selecciones']);
-        }
-
-        if(count($_SESSION['selecciones']) == 0){
-            header("Location:".url.'?controller=producto&action=index');
-        }
-        
-        //header
-        include_once 'views/header.php';
-        //carrito
-        include_once 'views/carrito.php';
-        //footer
-        include_once 'views/footer.php';
     }
 
     //funcion que se usara para eliminar un producto con el id
@@ -211,7 +203,7 @@ class productoController{
         //Te almacena el pedido en la base de datos Pedido DAO que guarda el pedido en la base de datos
         
         //Guardo la cookie
-        setcookie("Ultimo pedido",$_POST['cantidadFinal'],time()+3600);
+        setcookie("Ultimopedido",$_POST['cantidadFinal'],time()+3600);
 
         //Borramos sesion de pedido
         unset($_SESSION['selecciones']);

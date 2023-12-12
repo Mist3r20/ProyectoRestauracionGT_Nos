@@ -120,6 +120,228 @@ body{
 
 
 
+/**SECCION 1*/
+.seccionesMAX1{
+    max-width: 1170px;
+    margin: auto;
+}
+
+.seccionesMAX1{
+    max-width: 1170px;
+    margin: auto;
+}
+
+.titulo-seccion1{
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--bg-colorTS);
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.large-article{
+    height: 400px;
+    background-size: cover;
+    background-position: center center;
+    padding-left: 15px;
+    padding-top: 30px;
+    
+}
+
+.small-article{
+    height: 195px;
+    background-size: cover;
+    background-position: center center;
+    padding-left: 15px;
+    padding-top: 30px;
+}
+
+
+
+.article1{
+    background-image: url('../images/ImagenesCategoriasDestacadas/Tartaletas_Champis_Queso.png');
+}
+
+.article2{
+    background-image: url('../images/ImagenesCategoriasDestacadas/Croquetas_jamon.png');
+}
+
+.article3{
+    background-image: url('../images/ImagenesCategoriasDestacadas/flatbread.png');
+}
+
+.article4{
+    background-image: url('../images/ImagenesCategoriasDestacadas/pizza.png');
+}
+
+.article5{
+    background-image: url('../images/ImagenesCategoriasDestacadas/crepes.png');
+}
+
+.article6{
+    background-image: url('../images/ImagenesCategoriasDestacadas/Flan_caramelo.png');
+}
+
+.col-md-3{
+    width: 285px;
+}
+
+.content{
+    color: white;
+}
+
+.redirect-button{
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: var(--bg-button);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+.redirect-button:hover{
+    background-color: var(--bg-buttonH);
+}
+div > h3{
+    font-size: 24px;
+    font-weight: normal;
+}
+div > p{
+    margin: 0px;
+}
+
+p > span{
+    font-weight: bold;
+}
+
+
+
+/**SECCION 2*/
+.fondo-seccion2{
+    background-color: var(--bg-color4);
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.seccionesMAX2{
+    max-width: 1140px;
+    margin: auto;
+}
+
+.titulo-seccion2{
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--bg-colorTS);
+    margin-bottom: 0px;
+}
+
+.section-button {
+    font-size: 14px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    padding-left: 12px;
+    padding-right: 12px;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.card-button{
+    padding: 6px 12px;
+    background-color: var(--bg-button);
+    color: white;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 35px;
+    margin-top: 17px;
+    letter-spacing: 2px;
+}
+
+.card-button:hover{
+    background-color: var(--bg-buttonH);
+}
+
+.card-title{
+    margin: auto;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.card{
+    border-radius: 0;
+}
+
+.card-text{
+    font-size: 12px;
+}
+
+
+/**Seccion 3*/
+
+.titulo-seccion3{
+    font-weight: bold;
+    font-size: 20px;
+    color: var(--bg-colorTS);
+    margin-bottom: 0px;
+}
+
+.comment-section{
+    margin-top: 20px;
+}
+
+
+.carousel-inner img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.rating{
+    font-size: 28px;
+    color: #ffe900; /*Amarillo*/
+    text-align: center;
+}
+
+.rating .star{
+    cursor: pointer;
+}
+
+.rating .star-empty {
+    color: #ccc; /* Gris */
+}
+
+.review-text{
+    height: 112px;
+    word-wrap: break-word;
+    font-size: 15px;
+    text-align: center;
+}
+
+
+
+/**Banner*/
+.enlace-banner{
+    display: block;
+    width: 100%;
+    margin: auto;
+}
+.espacio-banner{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
 /**Footer*/
 
 .footer-color{
@@ -457,10 +679,9 @@ body{
 }
 
 .linea-separatoria2{
-    height: 2px;
-    background-color: #000;
+    border-bottom: 1px solid black;
+    margin-bottom: 10px;
     margin-top: 0px;
-    opacity: 1;
 }
 
 .eliminar{
@@ -531,6 +752,10 @@ body{
 .align-precios{
     display: flex;
     justify-content: center;
+}
+
+.bold{
+    font-weight: bold;
 }
 
 

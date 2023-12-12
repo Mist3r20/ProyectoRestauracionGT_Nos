@@ -21,7 +21,7 @@
             $pos=0;
             foreach($_SESSION['selecciones'] as $pedido){
           ?>
-          <div class="producto row">
+          <div class="producto">
             <div class="row">
               <div class="col-md-2">
                 <div class="imagen-producto">
@@ -77,11 +77,11 @@
             </div>
           </div>
           <div class="row carrito-gastos-envio">
-            <div class="col-8 text-right">
+            <div class="col-8 text-right bold">
               <span>Gastos de envío: *</span>
               <span class="postal">* Se calculan ségun tu código postal</span>
             </div>
-            <div class="col-4 text-right">
+            <div class="col-4 text-right bold">
               <span>GRATIS</span>
             </div>
           </div>

@@ -15,7 +15,6 @@ class ProductoDAO{
     //Funcion que buscara en la base de datos todos los productos que sean de una misma categoria
     public static function getAllProductsType($tipo){
         $con = DataBase::connect();
-        //EJEMPLO
         $query = "SELECT productos.ID, productos.Nombre, productos.precio, productos.descripcion, productos.foto, categoria.nombreCategoria 
         FROM productos 
         JOIN categoria ON productos.ID_categoria = categoria.ID WHERE categoria.nombreCategoria = ?;";

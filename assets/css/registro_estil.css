@@ -1,0 +1,57 @@
+/** Codigo CSS de la pagina de inicio de sesion y registro*/
+
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+.form-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+    margin-bottom: 10px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.boton-iniciar{
+    padding: 2px 12px;
+    background-color: var(--bg-button);
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 2px;
+    border: none;
+}
+
+.boton-registrar{
+    padding: 2px 12px;
+    background-color: var(--bg-button);
+    border-radius: 4px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 13px;
+    letter-spacing: 2px;
+    border: none;
+}
+
+.boton-carta:hover{
+    background-color: var(--bg-buttonH);
+}

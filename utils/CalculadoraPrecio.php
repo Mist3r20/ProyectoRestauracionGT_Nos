@@ -48,7 +48,7 @@ class calculadoraPrecios{
     
         $totalGeneral = $precioTotal + $ivaTotal;
         return number_format($totalGeneral, 2, '.', ',');
-    }
+    } 
 }
 
 ?>
