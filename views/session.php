@@ -16,7 +16,7 @@
                         <h2>Iniciar Sesión</h2>
                         <input type="email" name="email" placeholder="Correo electrónico" class="form-control" required>
                         <input type="password" name="password" placeholder="Contraseña"class="form-control"required>
-                        <button type="submit" class="boton-iniciar">INICIAR</button>
+                        <button type="submit" class="boton-registro">INICIAR</button>
                     </form>
                     <form action="?controller=usuario&action=registro" method="POST" class="register-form">
                         <h2>Registrarse</h2>
@@ -25,7 +25,7 @@
                         <input type="email" name="email" placeholder="Correo electrónico" class="form-control" required>
                         <input type="password" name="password" placeholder="Contraseña" class="form-control" required>
                         <input type="password" name="passwordRepetir" placeholder="Repetir Contraseña" class="form-control" required>
-                        <button type="submit" class="boton-registrar">REGISTRARSE</button>
+                        <button type="submit" class="boton-registro">REGISTRARSE</button>
                     </form>
                 </div>
             </div>

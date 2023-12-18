@@ -15,7 +15,7 @@ class ProductoDAO{
     //Funcion que buscara en la base de datos todos los productos que sean de una misma categoria
     public static function getAllProductsType($tipo){
         $con = DataBase::connect();
-        $query = "SELECT productos.ID, productos.Nombre, productos.precio, productos.descripcion, productos.foto, categoria.nombreCategoria 
+        $query = "SELECT productos.ID, productos.Nombre, productos.precio, productos.descripcion, productos.ml, productos.foto, categoria.nombreCategoria 
         FROM productos 
         JOIN categoria ON productos.ID_categoria = categoria.ID WHERE categoria.nombreCategoria = ?;";
         $stmt = $con->prepare($query);
@@ -23,9 +23,29 @@ class ProductoDAO{
         $stmt->execute();
         $result = $stmt->get_result();
         $productos = [];
+
         while($row = $result->fetch_object($tipo)){
             $productos[] = $row;
         }
+
+        // while($row = $result->fetch_assoc()) {
+        //     if ($tipo == "Bebidas") {
+        //         $bebida = new Bebidas(
+        //             $row['ID'], 
+        //             $row['Nombre'], 
+        //             $row['precio'], 
+        //             $row['descripcion'],
+        //             $row['nombreCategoria'], 
+        //             $row['foto'], 
+        //             $row['ml']
+        //         );
+        //         $productos[] = $bebida;
+        //     } else {
+        //         $otroProducto = $result->fetch_object($tipo);
+        //         $productos[] = $otroProducto;
+        //     }
+        // }
+
         return $productos;
     }
 
@@ -86,6 +106,7 @@ class ProductoDAO{
 
         $stmt->execute();
         $result = $stmt->get_result();
+        
 
         return $result;
     }
@@ -96,6 +117,16 @@ class ProductoDAO{
         $stmt = $con->prepare("UPDATE productos SET nombre= ?, precio=?, descripcion=?, ID_categoria =? WHERE ID=?");
         //FALTA AÑADIR LOS PARAMETROS SUFICIENTES PARA UPDATE DE FOTO 
         $stmt->bind_param("sdsii", $nombre, $precio, $descripcion, $IDCategoria, $id);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
+    }
+
+    public static function insertProduct($nombre, $precio,  $descripcion, $ml, $IDCategoria, $foto){ 
+        $con = DataBase::connect();
+        $stmt = $con->prepare("INSERT INTO productos (nombre, precio, descripcion, ml, ID_categoria, foto) VALUES ('$nombre', '$precio', '$descripcion', '$ml', '$IDCategoria', '$foto')");
 
         $stmt->execute();
         $result = $stmt->get_result();
@@ -136,6 +167,64 @@ class ProductoDAO{
             $comentario[] = $row;
         }
         return $comentario;
+    }
+
+    //Esta funcion realizara 
+    public static function finalizarPedido($ID_user, $fechaSQL, $estado, $session, $total){
+        $con = DataBase::connect();
+
+        $query = "INSERT INTO pedidos (ID_usuario, fecha, estado_pedido) VALUES ('$ID_user', '$fechaSQL', '$estado')";
+
+        $stmt = $con->prepare($query);
+        $stmt->execute();
+
+        //Obtenemos el ID del ultimo registro insertado
+        $ultimoInsertID = $con->insert_id;
+
+        //Insertaremos productos en la tabla relacionada con el ID del pedido 
+        foreach($session as $producto){
+            $cantidad = $producto->getcantidad();
+            $id_producto = $producto->getProducto()->getID();
+
+            //Realizamos el INSERT en la tabla de detalles del pedido, el ID del ultimo insert y la info del producto
+            $query_producto = "INSERT INTO detalle_pedido (ID_pedido, ID_producto, cantidad, precio_total) VALUES ('$ultimoInsertID', '$id_producto', '$cantidad', '$total')";
+            $stmt_producto = $con->prepare($query_producto);
+            $stmt_producto->execute();
+        }
+
+        //Devolvemos el ID del ultimo insert realizado 
+        return $ultimoInsertID;
+    }
+
+    public static function getProductoByPedido($id_pedido){
+        $con = DataBase::connect();
+
+        $query = "SELECT detalle_pedido.ID_producto, detalle_pedido.cantidad FROM detalle_pedido WHERE ID_pedido = ?";
+
+        $stmt= $con->prepare($query);
+        $stmt->bind_param("i", $id_pedido);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $detalles_pedido = array();
+        while($row = $result->fetch_assoc()){
+            //Por cada fila obtenemos los detalles del producto
+            $id_producto=$row['ID_producto'];
+            $cantidad = $row['cantidad'];
+
+            //Consulta para obtener los datos del producto y ademas el objeto Producto
+            $producto_pedido = ProductoDAO::getProductById($id_producto);
+
+            //creamos el objeto pedido con el producto y la cantidad
+            $pedido = new Pedido($producto_pedido);
+            $pedido->setCantidad($cantidad);
+
+            //Agregamos el objeto Pedido al array de detalles
+            $detalles_pedido[]= $pedido;
+        }
+        
+        return $detalles_pedido;
+
+    
     }
 
     

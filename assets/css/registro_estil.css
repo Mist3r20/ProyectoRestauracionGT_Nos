@@ -2,7 +2,7 @@
 
 body {
     background-color: #f2f2f2;
-    font-family: Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .container {
@@ -30,7 +30,7 @@ h2 {
     margin-bottom: 20px;
 }
 
-.boton-iniciar{
+.boton-registro{
     padding: 2px 12px;
     background-color: var(--bg-button);
     border-radius: 4px;
@@ -41,16 +41,7 @@ h2 {
     border: none;
 }
 
-.boton-registrar{
-    padding: 2px 12px;
-    background-color: var(--bg-button);
-    border-radius: 4px;
-    color: #ffffff;
-    cursor: pointer;
-    font-size: 13px;
-    letter-spacing: 2px;
-    border: none;
-}
+
 
 .boton-carta:hover{
     background-color: var(--bg-buttonH);

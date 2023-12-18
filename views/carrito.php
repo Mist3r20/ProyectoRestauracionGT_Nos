@@ -101,7 +101,7 @@
           <div class="row">
             <div class="col-12">
               <div class="btn-ver-cesta text-center">
-                <form action=<?="?controller=producto&action=confirmar"?> method="POST">
+                <form action=<?="?controller=producto&action=confirmar&estado=finalizado"?> method="POST">
                   <input type="hidden" name="cantidadFinal" value=<?=calculadoraPrecios::calculadorTotalPedido($_SESSION['selecciones'])?>>
                   <button type="submit" class="btn button-finalizar">FINALIZAR</button>
                 </form>

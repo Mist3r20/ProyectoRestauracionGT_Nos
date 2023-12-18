@@ -29,10 +29,7 @@ class usuarioController{
                     if(password_verify($contra, $DBcontra)){
                         session_start();
                         $_SESSION['ID']=$usuario->getID();
-                        // $_SESSION['nombre']=$usuario->getNombre();
-                        // $_SESSION['apellido']=$usuario->getApellido();
-                        // $_SESSION['email']=$usuario->getEmail();
-                        // $_SESSION['contraseña']=$usuario->getContraseña();
+                        $_SESSION['rol']=$usuario->getRol();
                         header("Location:".url.'?controller=producto&action=index');
                         
                     }
@@ -53,7 +50,9 @@ class usuarioController{
                 //Ciframos la contraseña
                 $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
                 $resultadoInsert = UsuarioDAO::insertUsuario($nombre, $apellido, $email, $password);
-                echo $resultadoInsert;
+                //Redirigimos a la pagina principal
+                header("Location:".url.'?controller=producto');
+                
             }
         }
     }

@@ -87,6 +87,9 @@
                     </select>
                     <button type="submit" value="Enviar" class="section-button">FILTRAR</button>
                   </form>
+                  <form action="?controller=producto&action=crear" method="POST">
+                    <button class="section-button">CREAR</button> 
+                  </form>
                 </div>
                 <section class="lista-cartas row">
                   <?php
@@ -110,9 +113,13 @@
                         </div>
                         <div class="col-6 d-flex align-items-center">
                           <div class="text-center">
-                            <form action="?controller=producto&action=sel" method="POST">
+                            <form action="?controller=producto&action=editar" method="POST">
                               <input name="ID" value=<?=$producto->getID()?> type="hidden">
-                              <button class="boton-carta">COMPRAR</button> 
+                              <button class="boton-carta">EDITAR</button> 
+                            </form>
+                            <form action="?controller=producto&action=eliminar" method="POST">
+                              <input name="ID" value=<?=$producto->getID()?> type="hidden">
+                              <button class="boton-carta">ELIMINAR</button> 
                             </form>
                           </div>
                         </div>

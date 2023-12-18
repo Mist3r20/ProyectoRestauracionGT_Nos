@@ -26,19 +26,41 @@ class productoController{
         
         //cabecera
         include 'views/header.php';
-        
+
+        //Realizamos comprobacion del rol del usuario para poder mostrar despues un tipo u otro de boton en la pagina de carrito
+        if(isset($_COOKIE['Ultimopedido']) && isset($_SESSION['ID']) && $_SESSION['ID'] == $_COOKIE['ID']){
+            $cookie = '<form action="?controller=producto&action=carrito&recuperar=true" method="POST">
+            <button class="redirect-button">RECUPERAR ULTIMO PEDIDO</button>
+            </form>';
+        }else{
+            $cookie = '';
+        }
         //panel
         include_once 'views/home.php';
 
         //creamos cookie
+        
         if(isset($_COOKIE['Ultimopedido'])){
-            echo 'Tu ultimo pedido fue de '.$_COOKIE['Ultimopedido'].'€';
-            setcookie("UltimoPedido",'',time()-3600);
+            $datos_cookie = $_COOKIE['Ultimopedido'];
         }
+        // setcookie("Ultimopedido",'',time()-3600);
         //fotter
         include_once 'views/footer.php';
     
     }
+
+    // public function conseguirEstrellas(){
+    //     $cali = $comentario->getEstrellas();
+    //     for($i = 1; $i<=5; $i++){
+    //        if($i<=$cali){
+    //          $estrellas = '<span class="star">&#9733;</span>';
+    //         } else{ 
+    //          $estrellas = '<span class="star-empty">&#9733;</span>';
+    //         }
+    //     }
+       
+        
+    // }
 
 
     //Funcion que mostrara la carta de la pagina web con los productos que se deseen ver
@@ -63,15 +85,21 @@ class productoController{
             $categoria = 'Todas categorias';
         }
 
-        
 
         // Verificar si $_SESSION['selecciones'] tiene elementos
         $tieneElementos = !empty($_SESSION['selecciones']);
 
         //cabecera
         include_once 'views/header.php';
-        //panel
-        include_once 'views/carta.php';
+
+        //Identificamos si el usuario logueado es administrador para mostrar unas u otras opciones
+        if(isset($_SESSION['rol']) && $_SESSION['rol'] == "Administrador"){
+            include_once 'views/cartaAdmin.php';
+        } else {
+            //panel
+            include_once 'views/carta.php';
+        }
+
         //footer
         include_once 'views/footer.php';
 
@@ -79,6 +107,11 @@ class productoController{
 
     //funcion que contiene el carrito de la pagina web
     public function carrito(){
+
+        if(isset($_GET['recuperar'])){
+            $recuperar = ProductoDAO::getProductoByPedido($_COOKIE['Ultimopedido']);
+            $_SESSION['selecciones'] = $recuperar;
+        }
 
         if(isset($_POST['Add'])){
             //Añadimos producto
@@ -165,7 +198,7 @@ class productoController{
             ProductoDAO::deleteProduct($id_product);
         }
         
-        header("Location:".url.'?controller=producto');
+        header("Location:".url.'?controller=producto&action=carta');
     }
     
     //funcion para editar un producto
@@ -194,17 +227,68 @@ class productoController{
             ProductoDAO::updateProduct($id, $nombre, $precio,  $descripcion, $IDCategoria, $foto);
             
         }
-        header("Location:".url.'?controller=producto');
+        header("Location:".url.'?controller=producto&action=carta');
+    }
+
+    public function crear(){
+
+        $categorias = ProductoDAO::getCategorias();
+        //views
+        include_once "views/crearProducto.php";
+    }
+
+
+    public function añadirBBDD(){
+        if(isset($_POST['nombre']) && isset($_POST['precio']) && isset($_POST['descripcion']) && isset($_POST['IDCategoria'])){
+            if(isset($_POST['IDCategoria']) == 7 && isset($_POST['ml'])){
+                $nombre = $_POST['nombre'];
+                $precio = $_POST['precio'];
+                $descripcion = $_POST['descripcion'];
+                $ml = $_POST['ml'];
+                $IDCategoria = $_POST['IDCategoria'];
+                $foto = $_POST['imagen'];
+
+                ProductoDAO::insertProduct($nombre, $precio,  $descripcion, $ml, $IDCategoria, $foto);
+            }else{
+                $nombre = $_POST['nombre'];
+                $precio = $_POST['precio'];
+                $descripcion = $_POST['descripcion'];
+                $ml = NULL;
+                $IDCategoria = $_POST['IDCategoria'];
+                $foto = $_POST['imagen'];
+
+                ProductoDAO::insertProduct($nombre, $precio,  $descripcion, $ml, $IDCategoria, $foto);
+            }
+            
+        }
+        header("Location:".url.'?controller=producto&action=carta');
     }
     
-    //Funcion confirmar sera la que suba el pedido uan vez finalizado a la base de datos
+    //Funcion confirmar sera la que suba el pedido uan vez finalizado a la base de datos y cree las cookies necesarias
     public function confirmar(){
-        session_start();
-        //Te almacena el pedido en la base de datos Pedido DAO que guarda el pedido en la base de datos
         
-        //Guardo la cookie
-        setcookie("Ultimopedido",$_POST['cantidadFinal'],time()+3600);
+        //Te almacena el pedido en la base de datos PedidoDAO que guarda el pedido en la base de datos
+        $ID_user = $_SESSION['ID'];
+        // Crear un objeto DateTime con la fecha actual
+        $fecha = new DateTime();
 
+        // Convertir la fecha a un formato adecuado para SQL 
+        $fechaSQL = $fecha->format('Y-m-d'); 
+
+        if($_GET['estado']=="finalizado"){
+            $estado= $_GET['estado'];
+            $total = calculadoraPrecios::calculadorTotalPedido($_SESSION['selecciones']);
+            $UltimoInsertID = ProductoDAO::finalizarPedido($ID_user, $fechaSQL, $estado, $_SESSION['selecciones'], $total);
+            //Guardo la cookie
+            setcookie("Ultimopedido",$UltimoInsertID,time()+3600);
+            setcookie("ID",$_SESSION['ID'],time()+3600);
+        }//else{
+        //     $estado=$_GET['estado'];
+        //     $UltimoInsertID = ProductoDAO::finalizarPedido($ID_user, $fechaSQL, $estado, $_SESSION['selecciones']);
+        //     //Guardo la cookie
+        //     setcookie("PedidoNoFinalizado",$UltimoInsertID, time()+6000);
+        // }
+        
         //Borramos sesion de pedido
         unset($_SESSION['selecciones']);
 

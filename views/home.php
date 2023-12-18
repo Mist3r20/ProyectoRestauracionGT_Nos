@@ -160,7 +160,6 @@
                 <input name="ID" value=<?=$producto->getID()?> hidden>
                 <button class="card-button">COMPRAR</button>
               </form>
-              
             </div>
           </article>
         </div>
@@ -215,6 +214,7 @@
         </div>
         <?php } ?>
       </div>
+      <?=$cookie?>
     </div>
   </div>
   <!--Seccion 4 / Banner-->
