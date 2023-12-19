@@ -24,27 +24,17 @@ class ProductoDAO{
         $result = $stmt->get_result();
         $productos = [];
 
-        while($row = $result->fetch_object($tipo)){
-            $productos[] = $row;
+        if($tipo == 'Bebidas'){
+            while($row = $result->fetch_assoc()){
+                $productos[] = new Bebidas($row['ID'], $row['Nombre'], $row['precio'],$row['descripcion'], $row['nombreCategoria'], $row['foto'], $row['ml']);
+            }
+        }else{
+            while($row = $result->fetch_object($tipo)){
+                $productos[] = $row;
+            }
         }
+        
 
-        // while($row = $result->fetch_assoc()) {
-        //     if ($tipo == "Bebidas") {
-        //         $bebida = new Bebidas(
-        //             $row['ID'], 
-        //             $row['Nombre'], 
-        //             $row['precio'], 
-        //             $row['descripcion'],
-        //             $row['nombreCategoria'], 
-        //             $row['foto'], 
-        //             $row['ml']
-        //         );
-        //         $productos[] = $bebida;
-        //     } else {
-        //         $otroProducto = $result->fetch_object($tipo);
-        //         $productos[] = $otroProducto;
-        //     }
-        // }
 
         return $productos;
     }
@@ -70,18 +60,23 @@ class ProductoDAO{
 
 
         
-        $stmt=$con->prepare("SELECT productos.ID, productos.Nombre, productos.precio, productos.descripcion, productos.foto
+        $stmt=$con->prepare("SELECT productos.ID, productos.Nombre, productos.precio, productos.descripcion, productos.ml ,productos.foto
         FROM productos 
         JOIN categoria ON productos.ID_categoria = categoria.ID WHERE productos.ID = ?;");
         $stmt->bind_param("i", $id);
         $stmt->execute();
         $result=$stmt->get_result();
+        
+
+        if($tipo == 'Bebidas'){
+            $row = $result->fetch_assoc();
+            $producto = new Bebidas($row['ID'], $row['Nombre'], $row['precio'],$row['descripcion'], $tipo, $row['foto'], $row['ml']);
+            
+        }else{
+            $producto = $result->fetch_object($tipo);
+        }
+        
         $con->close();
-
-
-        $producto = $result->fetch_object($tipo);
-        
-        
         return $producto;
         
     }

@@ -20,6 +20,12 @@
           <?php
             $pos=0;
             foreach($_SESSION['selecciones'] as $pedido){
+              $producto = $pedido->getProducto();
+              if($producto instanceof Bebidas && method_exists($producto, 'getMl')){
+                $ml = $producto->getMl()."ml";
+              }else{
+                $ml = '';
+              }
           ?>
           <div class="producto">
             <div class="row">
@@ -31,7 +37,7 @@
               <div class="col-md-10">
                 <div class="row linea-separatoria2">
                   <div class="col-7">
-                    <p class="nombre-producto"><?=$pedido->getProducto()->getNombre()?></p>
+                    <p class="nombre-producto"><?=$pedido->getProducto()->getNombre()?> <?=$ml?></p>
                   </div>
                   <div class="col-3 d-flex justify-content-center">
                     <form action=<?="?controller=producto&action=carrito"?> method="POST">

@@ -110,7 +110,7 @@
                         </div>
                         <div class="col-6 d-flex align-items-center">
                           <div class="text-center">
-                            <form action="?controller=producto&action=sel" method="POST">
+                            <form action="?controller=producto&action=sel&pg=carta" method="POST">
                               <input name="ID" value=<?=$producto->getID()?> type="hidden">
                               <button class="boton-carta">COMPRAR</button> 
                             </form>

@@ -49,18 +49,7 @@ class productoController{
     
     }
 
-    // public function conseguirEstrellas(){
-    //     $cali = $comentario->getEstrellas();
-    //     for($i = 1; $i<=5; $i++){
-    //        if($i<=$cali){
-    //          $estrellas = '<span class="star">&#9733;</span>';
-    //         } else{ 
-    //          $estrellas = '<span class="star-empty">&#9733;</span>';
-    //         }
-    //     }
-       
-        
-    // }
+
 
 
     //Funcion que mostrara la carta de la pagina web con los productos que se deseen ver
@@ -183,6 +172,8 @@ class productoController{
                 } else {
                     header("Location:".url.'?controller=producto&action=carta');
                 }
+            }else{
+                header("Location:".url.'?controller=producto&action=index');
             }
         }
 
