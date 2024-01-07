@@ -6,16 +6,20 @@ abstract class Usuario{
     protected $Nombre;
     protected $Apellido;
     protected $email;
+    protected $direccion;
+    protected $telefono;
     protected $password;
     protected $rol = "Basico";
 
 
 
-    public function __construct($ID, $Nombre, $Apellido, $email, $password, $rol){
+    public function __construct($ID, $Nombre, $Apellido, $email, $direccion, $telefono, $password, $rol){
         $this->ID=$ID;
         $this->Nombre=$Nombre;
         $this->Apellido=$Apellido;
         $this->email=$email;
+        $this->direccion= $email;
+        $this->telefono=$telefono;
         $this->password=$password;
         $this->rol=$rol;
     
@@ -137,6 +141,46 @@ abstract class Usuario{
     public function setRol($rol)
     {
         $this->rol = $rol;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of telefono
+     */ 
+    public function getTelefono()
+    {
+        return $this->telefono;
+    }
+
+    /**
+     * Set the value of telefono
+     *
+     * @return  self
+     */ 
+    public function setTelefono($telefono)
+    {
+        $this->telefono = $telefono;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of direccion
+     */ 
+    public function getDireccion()
+    {
+        return $this->direccion;
+    }
+
+    /**
+     * Set the value of direccion
+     *
+     * @return  self
+     */ 
+    public function setDireccion($direccion)
+    {
+        $this->direccion = $direccion;
 
         return $this;
     }

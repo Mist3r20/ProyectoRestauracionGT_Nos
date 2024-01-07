@@ -24,6 +24,7 @@ class ProductoDAO{
         $result = $stmt->get_result();
         $productos = [];
 
+        //Comprobamos si el objeto sera una bebida u otro producto 
         if($tipo == 'Bebidas'){
             while($row = $result->fetch_assoc()){
                 $productos[] = new Bebidas($row['ID'], $row['Nombre'], $row['precio'],$row['descripcion'], $row['nombreCategoria'], $row['foto'], $row['ml']);
@@ -67,7 +68,7 @@ class ProductoDAO{
         $stmt->execute();
         $result=$stmt->get_result();
         
-
+        //Comprobamos si el objeto sera una bebida u otro producto 
         if($tipo == 'Bebidas'){
             $row = $result->fetch_assoc();
             $producto = new Bebidas($row['ID'], $row['Nombre'], $row['precio'],$row['descripcion'], $tipo, $row['foto'], $row['ml']);
@@ -119,6 +120,7 @@ class ProductoDAO{
         return $result;
     }
 
+    //Funcion que hara el insert del producto nuevo creado por el usuario
     public static function insertProduct($nombre, $precio,  $descripcion, $ml, $IDCategoria, $foto){ 
         $con = DataBase::connect();
         $stmt = $con->prepare("INSERT INTO productos (nombre, precio, descripcion, ml, ID_categoria, foto) VALUES ('$nombre', '$precio', '$descripcion', '$ml', '$IDCategoria', '$foto')");
@@ -168,7 +170,7 @@ class ProductoDAO{
     public static function finalizarPedido($ID_user, $fechaSQL, $estado, $session, $total){
         $con = DataBase::connect();
 
-        $query = "INSERT INTO pedidos (ID_usuario, fecha, estado_pedido) VALUES ('$ID_user', '$fechaSQL', '$estado')";
+        $query = "INSERT INTO pedidos (ID_usuario, fecha, estado_pedido, precioTotal) VALUES ('$ID_user', '$fechaSQL', '$estado', '$total')";
 
         $stmt = $con->prepare($query);
         $stmt->execute();
@@ -182,7 +184,7 @@ class ProductoDAO{
             $id_producto = $producto->getProducto()->getID();
 
             //Realizamos el INSERT en la tabla de detalles del pedido, el ID del ultimo insert y la info del producto
-            $query_producto = "INSERT INTO detalle_pedido (ID_pedido, ID_producto, cantidad, precio_total) VALUES ('$ultimoInsertID', '$id_producto', '$cantidad', '$total')";
+            $query_producto = "INSERT INTO detalle_pedido (ID_pedido, ID_producto, cantidad) VALUES ('$ultimoInsertID', '$id_producto', '$cantidad')";
             $stmt_producto = $con->prepare($query_producto);
             $stmt_producto->execute();
         }
@@ -191,6 +193,7 @@ class ProductoDAO{
         return $ultimoInsertID;
     }
 
+    //Funcion que recogera los productos que haya en un pedido
     public static function getProductoByPedido($id_pedido){
         $con = DataBase::connect();
 

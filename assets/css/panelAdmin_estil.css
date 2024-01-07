@@ -1,0 +1,13 @@
+.seccionesMAX2{
+    max-width: 1140px;
+    margin: auto;
+}
+
+table {
+    border-collapse: collapse;
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+  }

@@ -6,7 +6,7 @@ body {
 }
 
 .container {
-    width: 50%;
+    width: 720px;
     margin: 50px auto;
     background-color: #fff;
     padding: 20px;
@@ -23,7 +23,7 @@ form {
 input[type="text"],
 input[type="number"],
 select {
-    width: 70%;
+    width: 504px;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -33,7 +33,7 @@ select {
 
 input[type="file"],
 input[type="submit"] {
-    width: 70%;
+    width: 504px;
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;

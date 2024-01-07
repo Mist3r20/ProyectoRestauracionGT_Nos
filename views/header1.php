@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/header_estil.css" rel="stylesheet" type="text/css" media="screen">
     <link href="../assets/css/full_estil.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     
-    <title>Header</title>
+    
+    <title><?=$nombre?></title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg color-header">

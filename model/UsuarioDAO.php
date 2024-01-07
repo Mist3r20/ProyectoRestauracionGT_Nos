@@ -17,7 +17,7 @@ class UsuarioDAO{
         $stmt->execute();
         $tipo = $stmt->get_result()->fetch_object()->rol;
 
-        $query ="SELECT usuarios.ID, usuarios.Nombre, usuarios.Apellido, usuarios.email, usuarios.password, usuarios.rol
+        $query ="SELECT usuarios.ID, usuarios.Nombre, usuarios.Apellido, usuarios.email, usuarios.direccion, usuarios.telefono, usuarios.password, usuarios.rol
         FROM usuarios WHERE email = ?;";
         $stmt = $con->prepare($query);
         $stmt->bind_param("s", $email);
@@ -34,17 +34,58 @@ class UsuarioDAO{
         return $usuarios;
     }
 
-    public static function insertUsuario($nombre, $apellido, $email, $password){
+    //Funcion para insertar en la base de datos el nuevo usuario
+    public static function insertUsuario($nombre, $apellido, $email, $direccion, $telefono, $password){
         $con = DataBase::connect();
 
-        $query = "INSERT INTO usuarios (nombre, apellido, email, password, rol) VALUES ('$nombre', '$apellido','$email','$password', 'Basico')";
+        $query = "INSERT INTO usuarios (nombre, apellido, email, direccion, telefono, password, rol) VALUES ('$nombre', '$apellido','$email','$direccion', '$telefono', '$password', 'Basico')";
         $stmt = $con->prepare($query);
         $stmt->execute();
         
         $result = $stmt->get_result();
         return $result;
-    } 
+    }
 
+    //Funcion para buscar un usuario por su ID
+    public static function getUsuarioById($id){
+        
+        $con = DataBase::connect();
+
+        $query = "SELECT usuarios.rol FROM usuarios WHERE ID = ?";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $tipo = $stmt->get_result()->fetch_object()->rol;
+
+        $query ="SELECT usuarios.ID, usuarios.Nombre, usuarios.Apellido, usuarios.email, usuarios.direccion, usuarios.telefono, usuarios.password, usuarios.rol
+        FROM usuarios WHERE ID = ?;";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $con->close();
+
+        while($row = $result->fetch_object($tipo)){
+            $user[] = $row;
+        }
+
+        return $user;
+    
+    }
+
+    //Funcion para actualizar a un usuario en la BBDD
+    public static function updateUsuario($id, $nombre, $apellido, $email, $direccion, $telefono, $contra){
+        
+        $con = DataBase::connect();
+
+        $query = "UPDATE usuarios SET nombre = ?, apellido = ?, email = ?, direccion = ?, telefono= ?, password = ? WHERE ID = ?";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("ssssisi", $nombre, $apellido, $email, $direccion, $telefono, $contra, $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        return $result;
+    }
     
 }
 

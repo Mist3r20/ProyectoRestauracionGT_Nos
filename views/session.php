@@ -23,6 +23,8 @@
                         <input type="text" name="username" placeholder="Nombre" class="form-control" required>
                         <input type="text" name="apellido" placeholder="Apellido" class="form-control" required>
                         <input type="email" name="email" placeholder="Correo electrónico" class="form-control" required>
+                        <input type="text" name="direccion" placeholder="Dirección" class="form-control" required>
+                        <input type="text" name="telefono" placeholder="Teléfono" class="form-control" required>
                         <input type="password" name="password" placeholder="Contraseña" class="form-control" required>
                         <input type="password" name="passwordRepetir" placeholder="Repetir Contraseña" class="form-control" required>
                         <button type="submit" class="boton-registro">REGISTRARSE</button>

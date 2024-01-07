@@ -32,18 +32,18 @@
             </div>
             <div class="row redes mb-70">
                 <div class="col-3-redes d-flex justify-content-center align-items-center">
-                    <a href="#" class="icono">
+                    <a href="https://www.facebook.com/galeriasdeltresillo/" class="icono">
                         <span class="facebook"></span>
                     </a>
                 </div>
                 <div class="col-3-redes d-flex justify-content-center align-items-center">
-                    <a href="#" class="icono"><span class="twitter"></span></a>
+                    <a href="https://twitter.com/i/flow/login?redirect_after_login=%2Fgdtresillo" class="icono"><span class="twitter"></span></a>
                 </div>
                 <div class="col-3-redes d-flex justify-content-center align-items-center">
-                    <a href="#" class="icono"><span class="instagram"></span></a>
+                    <a href="https://www.instagram.com/galeriasdeltresillo_oficial/" class="icono"><span class="instagram"></span></a>
                 </div>
                 <div class="col-3-redes d-flex justify-content-center align-items-center">
-                    <a href="#" class="icono"><span class="gt"></span></a>
+                    <a href="https://blog.galeriasdeltresillo.com/" class="icono"><span class="gt"></span></a>
                 </div>
             </div>
             <div class="row">

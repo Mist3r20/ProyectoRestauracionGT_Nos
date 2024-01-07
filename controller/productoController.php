@@ -20,6 +20,7 @@ class productoController{
 
     //Funcion index la cual recogera la pagina HOME de la pagina 
     public function index(){
+        $nombre = "Pagina Principal";
         
         // Verificar si $_SESSION['selecciones'] tiene elementos
         $tieneElementos = !empty($_SESSION['selecciones']);
@@ -54,7 +55,7 @@ class productoController{
 
     //Funcion que mostrara la carta de la pagina web con los productos que se deseen ver
     public function carta(){
-        
+        $nombre = "Carta";
 
         //comprobamos la categoria seleccionada en el select de la pagina, o del submenu de las paginas, sino se ha seleccionada niguna categoria
         //mostrara todos los productos
@@ -81,14 +82,9 @@ class productoController{
         //cabecera
         include_once 'views/header.php';
 
-        //Identificamos si el usuario logueado es administrador para mostrar unas u otras opciones
-        if(isset($_SESSION['rol']) && $_SESSION['rol'] == "Administrador"){
-            include_once 'views/cartaAdmin.php';
-        } else {
-            //panel
-            include_once 'views/carta.php';
-        }
-
+        //panel
+        include_once 'views/carta.php';
+        
         //footer
         include_once 'views/footer.php';
 
@@ -96,6 +92,7 @@ class productoController{
 
     //funcion que contiene el carrito de la pagina web
     public function carrito(){
+        $nombre = "Carrito";
 
         if(isset($_GET['recuperar'])){
             $recuperar = ProductoDAO::getProductoByPedido($_COOKIE['Ultimopedido']);
@@ -194,6 +191,7 @@ class productoController{
     
     //funcion para editar un producto
     public function editar(){
+        $nombre = "Editar Pedido";
         if(isset($_POST['ID'])){
             $id_producto=$_POST['ID'];
             $producto = ProductoDAO::getProductById($id_producto);
@@ -221,6 +219,7 @@ class productoController{
         header("Location:".url.'?controller=producto&action=carta');
     }
 
+    //funcion para crear un producto nuevo
     public function crear(){
 
         $categorias = ProductoDAO::getCategorias();
@@ -229,6 +228,7 @@ class productoController{
     }
 
 
+    //funcion que recibira los datos para añadir nuevo producto a la BBDD
     public function añadirBBDD(){
         if(isset($_POST['nombre']) && isset($_POST['precio']) && isset($_POST['descripcion']) && isset($_POST['IDCategoria'])){
             if(isset($_POST['IDCategoria']) == 7 && isset($_POST['ml'])){
@@ -239,6 +239,7 @@ class productoController{
                 $IDCategoria = $_POST['IDCategoria'];
                 $foto = $_POST['imagen'];
 
+                //Enviamos los datos para poder insertarlo en la BBDD
                 ProductoDAO::insertProduct($nombre, $precio,  $descripcion, $ml, $IDCategoria, $foto);
             }else{
                 $nombre = $_POST['nombre'];
@@ -247,7 +248,7 @@ class productoController{
                 $ml = NULL;
                 $IDCategoria = $_POST['IDCategoria'];
                 $foto = $_POST['imagen'];
-
+                //Enviamos los datos para poder insertarlo en la BBDD pero si no es una bebida
                 ProductoDAO::insertProduct($nombre, $precio,  $descripcion, $ml, $IDCategoria, $foto);
             }
             
@@ -266,25 +267,24 @@ class productoController{
         // Convertir la fecha a un formato adecuado para SQL 
         $fechaSQL = $fecha->format('Y-m-d'); 
 
-        if($_GET['estado']=="finalizado"){
+        if(isset($_GET['estado']) && $_GET['estado']=="finalizado" && isset($_SESSION['ID'])){
             $estado= $_GET['estado'];
             $total = calculadoraPrecios::calculadorTotalPedido($_SESSION['selecciones']);
             $UltimoInsertID = ProductoDAO::finalizarPedido($ID_user, $fechaSQL, $estado, $_SESSION['selecciones'], $total);
             //Guardo la cookie
             setcookie("Ultimopedido",$UltimoInsertID,time()+3600);
             setcookie("ID",$_SESSION['ID'],time()+3600);
-        }//else{
-        //     $estado=$_GET['estado'];
-        //     $UltimoInsertID = ProductoDAO::finalizarPedido($ID_user, $fechaSQL, $estado, $_SESSION['selecciones']);
-        //     //Guardo la cookie
-        //     setcookie("PedidoNoFinalizado",$UltimoInsertID, time()+6000);
-        // }
-        
-        //Borramos sesion de pedido
-        unset($_SESSION['selecciones']);
 
-        //Redirigimos a la pagina principal
-        header("Location:".url.'?controller=producto');
+            //Borramos sesion de pedido
+            unset($_SESSION['selecciones']);
+
+            //Redirigimos a la pagina principal
+            header("Location:".url.'?controller=producto');
+            
+        }else{
+            header("Location:".url.'?controller=usuario&action=session');
+        }
+        
     }
 }
 ?>

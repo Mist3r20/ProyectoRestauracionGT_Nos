@@ -36,10 +36,10 @@
               </div> 
               <div class="col-md-10">
                 <div class="row linea-separatoria2">
-                  <div class="col-7">
+                  <div class="col-6">
                     <p class="nombre-producto"><?=$pedido->getProducto()->getNombre()?> <?=$ml?></p>
                   </div>
-                  <div class="col-3 d-flex justify-content-center">
+                  <div class="col-4 d-flex justify-content-center">
                     <form action=<?="?controller=producto&action=carrito"?> method="POST">
                       <button class="unidades button-unidades" type="submit" name="Del" value=<?=$pos?>>-</button>
                       <button class="unidades button-unidades"><?=$pedido->getCantidad()?></button>

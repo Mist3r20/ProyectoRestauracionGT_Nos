@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/header_estil.css" rel="stylesheet" type="text/css" media="screen">
     <link href="../assets/css/full_estil.css" rel="stylesheet" type="text/css" media="screen">
     
-    <title>Header</title>
+    <title><?=$nombre?></title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg color-header">
@@ -28,7 +27,14 @@
             <form class="d-flex" role="search">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
               <button class="btn" type="submit"><span class="icon search"></span></button>
-              <a class="nav-link" href="<?=url."?controller=usuario&action=cerrarSession"?>">Cerrar Sessión</a>
+              <div class="dropdown">
+                <button class="btn" type="menu" id="menuBtn"><a class="icon usuario"></a></button>           
+                <div class="dropdown-content">
+                  <?php if (isset($datosLink)) echo $datosLink; ?>
+                  <?php if (isset($adminPanelLink)) echo $adminPanelLink; ?>
+                  <a class="linkheader" href=<?=url."?controller=usuario&action=cerrarSession"?>>Cerrar Sesión</a>
+                </div>
+              </div>
               <button class="btn" type="menu"><a class="icon comprar <?= $tieneElementos ? 'has-items' : '' ?>" href="<?=url."?controller=producto&action=carrito"?>"></a></button>
             </form>
           </div>

@@ -1,0 +1,40 @@
+.seccionesMAX2{
+    max-width: 1140px;
+    margin: auto;
+}
+
+
+.pedido {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.pedido h2 {
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.producto {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.producto img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.producto p {
+    font-size: 14px;
+}
+
+.total {
+    font-size: 16px;
+    font-weight: bold;
+}
