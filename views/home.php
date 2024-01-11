@@ -172,6 +172,7 @@
     <div class="seccionesMAX1">
       <div class="row">
         <p class="titulo-seccion3 mt-20">Opiniones de nuestros clientes</p>
+        
       </div>
       <div class="row pb-20 pt-30">
         <div class="col-12 col-lg-4 d-flex align-items-center justify-content-center">
@@ -213,6 +214,7 @@
           </div>
         </div>
         <?php } ?>
+        <a href="<?=url."?controller=comentarios&action=comentarios"?>" class="section-button">VER MÁS COMENTARIOS</a>
       </div>
       <?=$cookie?>
     </div>
