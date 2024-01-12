@@ -5,3 +5,32 @@
     margin-bottom: 10px;
     margin-top: 20px;
 }
+
+
+
+/* Estilo para cada comentario */
+.comentario {
+    max-width: 400px; /* Máximo ancho del comentario */
+    margin: 15px;
+    padding: 15px;
+    background-color: #fff;
+}
+
+/* Estilo para las estrellas */
+.puntuacion {
+    display: flex;
+    align-items: center;
+    font-size: 20px; /* Tamaño de las estrellas */
+    margin-bottom: 10px; /* Espaciado entre la puntuación y el comentario */
+}
+
+.puntuacion span {
+    margin-right: 5px; /* Espaciado entre las estrellas */
+    color: gold;
+}
+
+.textoComentario{
+    height: auto;
+    word-wrap: break-word;
+    font-size: 15px;
+}
