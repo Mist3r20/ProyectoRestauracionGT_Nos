@@ -15,7 +15,7 @@ class Comentario extends Comentarios{
          */ 
         public function getId()
         {
-                return $this->id;
+                return $this->ID;
         }
 
         /**
@@ -23,9 +23,9 @@ class Comentario extends Comentarios{
          *
          * @return  self
          */ 
-        public function setId($id)
+        public function setId($ID)
         {
-                $this->id = $id;
+                $this->ID = $ID;
 
                 return $this;
         }
@@ -35,7 +35,7 @@ class Comentario extends Comentarios{
          */ 
         public function getIdUser()
         {
-                return $this->idUser;
+                return $this->nombre_usuario;
         }
 
         /**
@@ -43,9 +43,9 @@ class Comentario extends Comentarios{
          *
          * @return  self
          */ 
-        public function setIdUser($idUser)
+        public function setIdUser($nombre_usuario)
         {
-                $this->idUser = $idUser;
+                $this->nombre_usuario = $nombre_usuario;
 
                 return $this;
         }

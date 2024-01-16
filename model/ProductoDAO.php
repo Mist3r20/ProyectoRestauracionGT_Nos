@@ -155,7 +155,9 @@ class ProductoDAO{
         
         $con = DataBase::connect();
         //EJEMPLO
-        $query = "SELECT comentarios.ID, comentarios.ID_usuario, comentarios.calificacion, comentarios.texto FROM comentarios";
+        $query = "SELECT comentarios.ID, comentarios.ID_usuario, comentarios.calificacion, comentarios.texto, usuarios.nombre as nombre_usuario
+        FROM comentarios
+        JOIN usuarios ON comentarios.ID_usuario = usuarios.ID;";
         $stmt = $con->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -163,6 +165,7 @@ class ProductoDAO{
         while($row = $result->fetch_object('Comentario')){
             $comentario[] = $row;
         }
+       
         return $comentario;
     }
 

@@ -16,10 +16,11 @@
         <div class="row seccionesMAX1">
             <h1 class="tituloComentarios">Comentarios</h1>
             <div class="reseñas-pagina row">
-                <script>mostrarComentario(reseñas)</script>
+                
             </div>
         </div>
     </div>
+    
 
 </body>
 </html>
