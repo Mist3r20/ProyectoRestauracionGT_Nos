@@ -190,7 +190,7 @@
           </div>
         </div>
         <!--Comentario 1-->
-        <?php $comentarios = ProductoDAO::getComentariosPrincipal();
+        <?php $comentarios = ComentariosDAO::getComentariosPrincipal();
           foreach($comentarios as $comentario){
         ?>
         <div class="col-12 col-lg-2">

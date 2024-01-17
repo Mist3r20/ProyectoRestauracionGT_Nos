@@ -13,8 +13,24 @@
     <script src="../assets/js/Comentarios.js"></script>
 
     <div class="container">
-        <div class="row seccionesMAX1">
+        <div class="row seccionesMAX1 mt-4">
             <h1 class="tituloComentarios">Comentarios</h1>
+            <label for="orden">Orden:</label>
+            <select id="orden">
+                <option>Selecciona el orden</option>
+                <option value="ascendente">Ascendente</option>
+                <option value="descendente">Descendente</option>
+            </select>
+
+            <label>Filtrar por Puntuación:</label>
+            <div id="checkboxes">
+                <label><input type="checkbox" class="filtro-puntuacion" value="0"> 0</label>
+                <label><input type="checkbox" class="filtro-puntuacion" value="1"> 1</label>
+                <label><input type="checkbox" class="filtro-puntuacion" value="2"> 2</label>
+                <label><input type="checkbox" class="filtro-puntuacion" value="3"> 3</label>
+                <label><input type="checkbox" class="filtro-puntuacion" value="4"> 4</label>
+                <label><input type="checkbox" class="filtro-puntuacion" value="5"> 5</label>
+            </div>
             <div class="reseñas-pagina row">
                 
             </div>
