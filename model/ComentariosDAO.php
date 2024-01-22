@@ -23,6 +23,17 @@ class ComentariosDAO{
         return $comentario;
     }
 
+    public static function insertComentarios($userID, $comentario, $puntuacion){
+        $con = DataBase::connect();
+        
+        $stmt = $con->prepare("INSERT INTO comentarios ('ID_usuario', 'calificacion', 'texto') VALUES ('$userID', '$puntuacion', '$comentario')");
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result;
+    
+    }
+
 }
 
 ?>

@@ -12,14 +12,20 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .then(response => {
         // Devuelve la respuesta como JSON
+        console.log(response);
         return response.json();
     })
     .then(data => {
         // Maneja los datos obtenidos llamando a la función mostrarComentario
         mostrarComentario(data);
-        document.getElementById('orden').addEventListener('change',function(){aplicarFiltro(data)});
-        document.querySelectorAll('.filtro-puntuacion').forEach(checkbox =>{
-            checkbox.addEventListener('change', function(){
+        
+        // Agrega eventos para cambios en los filtros y en el orden
+        document.getElementById('orden').addEventListener('change', function () {
+            aplicarFiltro(data);
+        });
+        
+        document.querySelectorAll('.filtro-puntuacion').forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
                 aplicarFiltro(data);
             });
         });
@@ -28,17 +34,18 @@ document.addEventListener('DOMContentLoaded', function () {
         // Maneja cualquier error que pueda ocurrir durante la solicitud o procesamiento
         console.error(error);
     });
-
 });
 
-//Creamos funcion para mostrar comentarios objeto creados ahora en el mismo archivo sin SQL
+// Creamos funcion para mostrar comentarios; objeto creados ahora en el mismo archivo sin SQL
 function mostrarComentario(comentarios) {
     let reseñasPagina = document.querySelector('.reseñas-pagina', '.row');
-   
+    
+    // Limpia el contenido existente en el contenedor
     while (reseñasPagina.firstChild) {
         reseñasPagina.removeChild(reseñasPagina.firstChild);
     }
-    
+
+    // Itera sobre los comentarios y crea elementos HTML para mostrarlos
     comentarios.forEach(comentario => {
         let divReseñas = document.createElement('div');
         divReseñas.classList.add('comentario', 'p-3', 'col-12', 'col-lg-2');
@@ -50,35 +57,31 @@ function mostrarComentario(comentarios) {
             <p class="mb-2 textoComentario">${comentario.texto}</p>
             <p>${comentario.ID_usuario}</p>
         `;
-        
+
         reseñasPagina.appendChild(divReseñas);
     });
-};
+}
 
-//Funcion para ordenar los comentarios
-function ordenarComentarios(comentarios, orden){
-    if(orden === 'ascendente'){
-        return comentarios.slice().sort((a,b) =>b.calificacion - a.calificacion);
-    }else{
-        return comentarios.slice().sort((a,b) =>a.calificacion - b.calificacion);
+// Función para ordenar los comentarios
+function ordenarComentarios(comentarios, orden) {
+    if (orden === 'ascendente') {
+        return comentarios.slice().sort((a, b) => b.calificacion - a.calificacion);
+    } else {
+        return comentarios.slice().sort((a, b) => a.calificacion - b.calificacion);
     }
 }
 
-const generarEstrellas = (puntuacion) => {
-    const estrellas = '★'.repeat(puntuacion) + '☆'.repeat(5 - puntuacion);
-    return `<span style="color: gold;">${estrellas}</span>`;
-};
-
-function filtrarPorPuntuacion(comentarios, puntuacionesSeleccionadas){
-    if(puntuacionesSeleccionadas.length === 0){
+// Función para filtrar comentarios por puntuación
+function filtrarPorPuntuacion(comentarios, puntuacionesSeleccionadas) {
+    if (puntuacionesSeleccionadas.length === 0) {
         return comentarios;
     }
 
-    return comentarios.filter(comentarios => puntuacionesSeleccionadas.includes(comentarios.calificacion));
-};
+    return comentarios.filter(comentario => puntuacionesSeleccionadas.includes(comentario.calificacion));
+}
 
-//Funcion para aplicar los filtros seleccionados
-function aplicarFiltro(comentarios){
+// Función para aplicar los filtros seleccionados
+function aplicarFiltro(comentarios) {
     const orden = document.getElementById('orden').value;
     const checkboxes = document.querySelectorAll('.filtro-puntuacion:checked');
     const puntuacionesSeleccionadas = Array.from(checkboxes).map(checkbox => parseInt(checkbox.value));
@@ -88,4 +91,10 @@ function aplicarFiltro(comentarios){
 
     mostrarComentario(reseñasFiltradas);
 }
+
+// Función para generar estrellas en función de la puntuación
+const generarEstrellas = (puntuacion) => {
+    const estrellas = '★'.repeat(puntuacion) + '☆'.repeat(5 - puntuacion);
+    return `<span style="color: gold;">${estrellas}</span>`;
+};
 

@@ -32,6 +32,7 @@
                 <div class="dropdown-content">
                   <?php if (isset($datosLink)) echo $datosLink; ?>
                   <?php if (isset($adminPanelLink)) echo $adminPanelLink; ?>
+                  <?php if (isset($pedidosLink)) echo $pedidosLink; ?>
                   <a class="linkheader" href=<?=url."?controller=usuario&action=cerrarSession"?>>Cerrar Sesión</a>
                 </div>
               </div>

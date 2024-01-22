@@ -12,6 +12,9 @@
 <body>
     <div class="seccionesMAX1">
         <h1>Productos</h1>
+        <form action="?controller=producto&action=crear" method="POST">
+	        <button class="boton-carta">CREAR</button> 
+        </form>
         <table>
             <tr>
                 <th>ID</th>

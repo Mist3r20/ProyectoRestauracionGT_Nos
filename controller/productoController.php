@@ -98,6 +98,7 @@ class productoController{
             $recuperar = ProductoDAO::getProductoByPedido($_COOKIE['Ultimopedido']);
             $_SESSION['selecciones'] = $recuperar;
         }
+        
 
         if(isset($_POST['Add'])){
             //Añadimos producto
@@ -285,6 +286,20 @@ class productoController{
             header("Location:".url.'?controller=usuario&action=session');
         }
         
+    }
+
+    public function VerDetallesPedido(){
+        $nombre = "Detalle del Pedido";
+        if(isset($_POST['ver'])){
+            $recuperar = ProductoDAO::getProductoByPedido($_POST['ver']);
+        }else{
+            header("Location:".url.'?controller=usuario&action=pedidos');
+        }
+        
+        include_once 'views/header.php';
+        include_once 'views/detallesPedido.php';
+        include_once 'views/footer.php';
+
     }
 }
 ?>

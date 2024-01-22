@@ -23,5 +23,18 @@ class comentariosController{
         include_once 'views/comentarios.php';
         include_once 'views/footer.php';
     }
+
+    public function FormularioComentarios(){
+        if(isset($_SESSION['ID'])){
+            $nombre = "Nuevo Comentario";
+
+            include_once 'views/header.php';
+            include_once 'views/formularioComentarios.php';
+            include_once 'views/footer.php'; 
+        }else{
+            header("Location:".url.'?controller=usuario&action=session');
+        }
+        
+    }
 }
 ?>

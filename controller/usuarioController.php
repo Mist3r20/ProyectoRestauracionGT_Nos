@@ -120,5 +120,16 @@ class usuarioController{
     
     
     }
+
+    public function pedidos(){
+        $nombre = "Pedidos Realizados";
+        $id = $_SESSION['ID'];
+        $Pedidos = ProductoDAO::getPedidosByUser($id);
+        
+
+        include_once 'views/header.php';
+        include_once 'views/mostrarPedidos.php';
+        include_once 'views/footer.php';
+    }
 }
 ?>

@@ -209,6 +209,25 @@ class ProductoDAO{
     
     }
 
-    
+    public static function getPedidosByUser($id){
+        $con = DataBase::connect();
+        $query = "SELECT pedidos.ID, pedidos.fecha, pedidos.precioTotal FROM pedidos WHERE ID_usuario = ?";
+
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->store_result();
+
+        $stmt->bind_result($pedido_ID, $pedido_fecha, $pedido_precioTotal);
+
+        $pedido = array();
+
+        while($stmt->fetch()){
+            $pedido[]=['pedido_id'=>$pedido_ID, 'pedido_fecha'=>$pedido_fecha, 'pedido_precioTotal'=>$pedido_precioTotal];
+        }
+
+        return $pedido;
+    }
+     
 }
 ?>
