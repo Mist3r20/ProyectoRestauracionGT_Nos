@@ -29,7 +29,7 @@
                 <input value="1" name="rate" id="star1" type="radio">
                 <label title="text" for="star1"></label>
             </div>
-
+            <input type="hidden" id="idPedido" value=<?=$id_pedido?>>
             <button type="submit">Enviar</button>
         </form>
         </div>

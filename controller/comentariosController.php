@@ -27,6 +27,8 @@ class comentariosController{
     public function FormularioComentarios(){
         if(isset($_SESSION['ID'])){
             $nombre = "Nuevo Comentario";
+            $id_pedido = $_POST['addComentario'];
+            var_dump($id_pedido);
 
             include_once 'views/header.php';
             include_once 'views/formularioComentarios.php';

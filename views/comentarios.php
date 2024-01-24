@@ -31,7 +31,7 @@
                 <label><input type="checkbox" class="filtro-puntuacion" value="4"> 4</label>
                 <label><input type="checkbox" class="filtro-puntuacion" value="5"> 5</label>
             </div>
-            <a href="<?=url."?controller=comentarios&action=FormularioComentarios"?>" class="card-button">NUEVO COMENTARIO</a>
+            
             <div class="row mt-4">
                 <div class="reseñas-pagina row">
                     
