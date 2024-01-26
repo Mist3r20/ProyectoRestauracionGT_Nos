@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const formulario = document.getElementById('ComentsForm');
 
     formulario.addEventListener('submit', function(evento){
-       evento.preventDefault();
+        evento.preventDefault();
        
        //Obtenemos valores del Formulario
        const comentario = document.getElementById('comentario').value;
@@ -15,18 +15,31 @@ document.addEventListener('DOMContentLoaded', function(){
         formData.append('puntuacion', puntuacion);
         formData.append('idPedido', idPedido);
 
-        console.log(comentario);
-        console.log(puntuacion);
-        console.log(idPedido);
         //Realizamos solicitud fetch para enviar los datos al servidor
         fetch('http://testnos.com/index.php/?controller=api&action=api', {
             method: 'POST',
             body: formData,
         }).then(response => response.json())
         .then(data => {
-            console.log('Comentario enviado exitosamente: ',data);
+            notie.alert({
+                type: 'success',
+                text: 'Comentario añadido correctamente',
+                time: 2,
+            });
+            setTimeout(function() {
+                window.location.href = 'http://testnos.com/index.php/?controller=usuario&action=pedidos';
+            }, 2000);
         }).catch(error =>{
-            console.log('Error al enviar comentario: ',error);
+            notie.alert({
+                type: 'error',
+                text: 'Ha ocurrido un problema al añadir tu comentario, prueba de nuevo más tarde',
+                time: 2,
+            });
+
+            // Redireccionar después de 2 segundos
+            setTimeout(function() {
+                window.location.href = 'http://testnos.com/index.php/?controller=usuario&action=pedidos';
+            }, 2000);
         });
     });
 

@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function(){
  function mostrarBoton(true_false, boton) {
     let labelNewComentario = boton.querySelector('.labelNewComentario');
     let buttonNewComentario = boton.querySelector('.buttonNewComentario');
-
+    
     if (true_false == false){
         labelNewComentario.remove();
     } else {

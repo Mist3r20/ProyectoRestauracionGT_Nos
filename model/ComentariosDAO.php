@@ -11,14 +11,14 @@ class ComentariosDAO{
         //EJEMPLO
         $query = "SELECT comentarios.ID, comentarios.ID_usuario, comentarios.calificacion, comentarios.texto, usuarios.nombre as nombre_usuario
         FROM comentarios
-        JOIN usuarios ON comentarios.ID_usuario = usuarios.ID
+        JOIN usuarios ON comentarios.ID_usuario = usuarios.ID ORDER BY comentarios.ID ASC
         LIMIT 4";
         $stmt = $con->prepare($query);
         $stmt->execute();
         $result = $stmt->get_result();
         $comentario = [];
         while($row = $result->fetch_object('Comentario')){
-            $comentario[] = $row;
+            $comentario[] = $row;       
         }
        
         return $comentario;

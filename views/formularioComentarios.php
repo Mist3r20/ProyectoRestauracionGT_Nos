@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/comentariosForm_estil.css" rel="stylesheet" type="text/css" media="screen">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
     <title>Añadir Comentarios</title>
 </head>
 <body>
@@ -35,5 +36,6 @@
         </div>
     </div>
     <script src="../assets/js/FormularioComentarios.js"></script>
+    <script src="https://unpkg.com/notie"></script>
 </body>
 </html>
