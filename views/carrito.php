@@ -91,6 +91,18 @@
               <span>GRATIS</span>
             </div>
           </div>
+          <div class="row carrito-descuento">
+            <div class="col-8 text-right">
+                <span>Descuento con puntos:</span>
+            </div>
+            <div class="col-4 text-right">
+              <input type="checkbox" id="aplicarDescuento">
+              
+            </div>
+          </div>
+          <div id="puntosUsuario">
+              
+          </div>
           <div class="row">
             <div class="col-12">
               <div class="linea-separatoria-negra"></div>
@@ -100,7 +112,7 @@
             <div class="col-8 text-right">
               <span>Total: </span>
             </div>
-            <div class="col-4 text-right">
+            <div class="col-4 text-right" id="precioFinal" data-precio="<?=calculadoraPrecios::calculadorTotalPedido($_SESSION['selecciones'])?>">
               <span><?=calculadoraPrecios::calculadorTotalPedido($_SESSION['selecciones'])?> €</span>
             </div>
           </div>
@@ -120,5 +132,6 @@
   </div>
     
   <script src="../assets/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/js/BotonDescuento.js"></script>
 </body>
 </html>

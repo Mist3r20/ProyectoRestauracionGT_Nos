@@ -93,6 +93,7 @@ class productoController{
     //funcion que contiene el carrito de la pagina web
     public function carrito(){
         $nombre = "Carrito";
+        
 
         if(isset($_GET['recuperar'])){
             $recuperar = ProductoDAO::getProductoByPedido($_COOKIE['Ultimopedido']);
@@ -270,7 +271,18 @@ class productoController{
 
         if(isset($_GET['estado']) && $_GET['estado']=="finalizado" && isset($_SESSION['ID'])){
             $estado= $_GET['estado'];
+            $puntosActuales = UsuarioDAO::obtenerPuntosDisponiblesUsuario($_SESSION['ID']);
+            $tasaPuntos = 1;
+
             $total = calculadoraPrecios::calculadorTotalPedido($_SESSION['selecciones']);
+
+            //calculamos los puntos
+            $puntosAgregar = round($total * $tasaPuntos);
+
+            //$nuevosPuntos mirar de AÑADIRLO A UTILS DE CALCULADORA PRECIO
+            $nuevosPuntos = $puntosActuales + $puntosAgregar;
+            UsuarioDAO::actualizarPuntos($_SESSION['ID'], $nuevosPuntos);
+
             $UltimoInsertID = ProductoDAO::finalizarPedido($ID_user, $fechaSQL, $estado, $_SESSION['selecciones'], $total);
             //Guardo la cookie
             setcookie("Ultimopedido",$UltimoInsertID,time()+3600);

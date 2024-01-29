@@ -79,6 +79,7 @@ class usuarioController{
         $id = $_SESSION['ID'];
         $users = UsuarioDAO::getUsuarioById($id);
         
+        
         include_once 'views/header.php';
         include_once 'views/datosUser.php';
         include_once 'views/footer.php';

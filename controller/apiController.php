@@ -45,6 +45,12 @@ class APIController{
 
             echo json_encode($tieneComentario, JSON_UNESCAPED_UNICODE);
             return;
+        }elseif($_POST["accion"] == 'mostrarPuntos'){
+            $idUser = $_SESSION["ID"];
+            $puntos = UsuarioDAO::obtenerPuntosDisponiblesUsuario($idUser);
+
+            echo json_encode($puntos, JSON_UNESCAPED_UNICODE);
+            return;
         }
       
     }

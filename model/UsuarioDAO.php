@@ -17,8 +17,11 @@ class UsuarioDAO{
         $stmt->execute();
         $tipo = $stmt->get_result()->fetch_object()->rol;
 
-        $query ="SELECT usuarios.ID, usuarios.Nombre, usuarios.Apellido, usuarios.email, usuarios.direccion, usuarios.telefono, usuarios.password, usuarios.rol
-        FROM usuarios WHERE email = ?;";
+        $query ="SELECT usuarios.ID, usuarios.Nombre, usuarios.Apellido, usuarios.email, usuarios.direccion, usuarios.telefono, usuarios.password, usuarios.rol, fidelidad.puntos
+        FROM usuarios
+        LEFT JOIN fidelidad ON usuarios.ID = fidelidad.ID_usuario
+        WHERE usuarios.email = ?;";
+
         $stmt = $con->prepare($query);
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -43,6 +46,14 @@ class UsuarioDAO{
         $stmt->execute();
         
         $result = $stmt->get_result();
+
+        $id_user = $con->insert_id;
+
+        $query2 = "INSERT INTO fidelidad (ID_usuario, puntos) VALUES ('$id_user', 0);";
+        $stmt2 = $con->prepare($query2);
+        $stmt2->execute();
+        
+        $result = $stmt->get_result();
         return $result;
     }
 
@@ -57,8 +68,11 @@ class UsuarioDAO{
         $stmt->execute();
         $tipo = $stmt->get_result()->fetch_object()->rol;
 
-        $query ="SELECT usuarios.ID, usuarios.Nombre, usuarios.Apellido, usuarios.email, usuarios.direccion, usuarios.telefono, usuarios.password, usuarios.rol
-        FROM usuarios WHERE ID = ?;";
+        $query ="SELECT usuarios.ID, usuarios.Nombre, usuarios.Apellido, usuarios.email, usuarios.direccion, usuarios.telefono, usuarios.password, usuarios.rol, fidelidad.puntos
+        FROM usuarios
+        LEFT JOIN fidelidad ON usuarios.ID = fidelidad.ID_usuario
+        WHERE usuarios.ID = ?;
+        ";
         $stmt = $con->prepare($query);
         $stmt->bind_param("s", $id);
         $stmt->execute();
@@ -86,6 +100,41 @@ class UsuarioDAO{
 
         return $result;
     }
+
+
+    public static function obtenerPuntosDisponiblesUsuario($idUser){
+        $con = DataBase::connect();
+    
+        $query = "SELECT puntos FROM fidelidad WHERE ID_usuario = ?";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("i", $idUser);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    
+        // Realizar fetch_assoc para obtener la fila asociativa
+        $puntosDisponiblesRow = $result->fetch_assoc();
+    
+        // Extraer el valor de la fila
+        $puntosDisponibles = $puntosDisponiblesRow['puntos'];
+    
+        // Cerrar la conexión y devolver el valor
+        $stmt->close();
+    
+        return $puntosDisponibles;
+    }
+
+    public static function actualizarPuntos($idUser, $puntosNew){
+        $con = DataBase::connect();
+
+        $query = "UPDATE fidelidad SET puntos = ? WHERE ID_usuario = ?";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("ii", $puntosNew, $idUser);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        return $result;
+    }
+    
     
 }
 

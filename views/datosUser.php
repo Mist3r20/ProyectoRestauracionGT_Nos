@@ -14,6 +14,8 @@
                 <?php foreach($users as $user) { ?>
                 <input type="hidden" name="id_usuario" value="<?= $user->getID() ?>">
                 <input type="hidden" name="contraseña_usuario" value="<?= $user->getPassword() ?>">
+                <label>Puntos:</label>
+                <label><?= $user->getPuntos() ?></label>
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" value="<?= $user->getNombre() ?>" class="input-field">

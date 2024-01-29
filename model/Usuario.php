@@ -9,6 +9,7 @@ abstract class Usuario{
     protected $direccion;
     protected $telefono;
     protected $password;
+    protected $puntos;
     protected $rol = "Basico";
 
 
@@ -181,6 +182,26 @@ abstract class Usuario{
     public function setDireccion($direccion)
     {
         $this->direccion = $direccion;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of puntos
+     */ 
+    public function getPuntos()
+    {
+        return $this->puntos;
+    }
+
+    /**
+     * Set the value of puntos
+     *
+     * @return  self
+     */ 
+    public function setPuntos($puntos)
+    {
+        $this->puntos = $puntos;
 
         return $this;
     }
