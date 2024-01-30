@@ -228,6 +228,11 @@ class ProductoDAO{
 
         return $pedido;
     }
+
+    public static function getUltimoPedido($idUser){
+        
+        
+    }
      
 }
 ?>

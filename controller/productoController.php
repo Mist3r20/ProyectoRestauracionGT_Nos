@@ -333,5 +333,13 @@ public function confirmar(){
         include_once 'views/footer.php';
 
     }
+
+    public function PaginaDetallesPedidoQR(){
+        $nombre = "Informacion del Pedido";
+
+        include_once 'views/header.php';
+        include_once 'views/detallesPedidoQR.php';
+        include_once 'views/footer.php';
+    }
 }
 ?>
