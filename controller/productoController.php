@@ -258,47 +258,67 @@ class productoController{
         header("Location:".url.'?controller=producto&action=carta');
     }
     
-    //Funcion confirmar sera la que suba el pedido uan vez finalizado a la base de datos y cree las cookies necesarias
-    public function confirmar(){
-        
-        //Te almacena el pedido en la base de datos PedidoDAO que guarda el pedido en la base de datos
-        $ID_user = $_SESSION['ID'];
-        // Crear un objeto DateTime con la fecha actual
-        $fecha = new DateTime();
+    // Función confirmar: esta función se encarga de confirmar y finalizar un pedido.
+public function confirmar(){
+    // Se obtiene el ID de usuario de la sesión actual.
+    $ID_user = $_SESSION['ID'];
 
-        // Convertir la fecha a un formato adecuado para SQL 
-        $fechaSQL = $fecha->format('Y-m-d'); 
+    // Se crea un objeto DateTime con la fecha y hora actuales.
+    $fecha = new DateTime();
 
-        if(isset($_GET['estado']) && $_GET['estado']=="finalizado" && isset($_SESSION['ID'])){
-            $estado= $_GET['estado'];
-            $puntosActuales = UsuarioDAO::obtenerPuntosDisponiblesUsuario($_SESSION['ID']);
-            $tasaPuntos = 1;
+    // Se convierte la fecha a un formato adecuado para SQL (YYYY-MM-DD).
+    $fechaSQL = $fecha->format('Y-m-d'); 
 
-            $total = calculadoraPrecios::calculadorTotalPedido($_SESSION['selecciones']);
+    // Se verifica si el estado del pedido es "finalizado" y si hay una sesión de usuario activa.
+    if(isset($_GET['estado']) && $_GET['estado']=="finalizado" && isset($_SESSION['ID'])){
+        // Se obtiene el estado del pedido.
+        $estado = $_GET['estado'];
 
-            //calculamos los puntos
-            $puntosAgregar = round($total * $tasaPuntos);
+        // Se obtienen los puntos disponibles del usuario actual.
+        $puntosActuales = UsuarioDAO::obtenerPuntosDisponiblesUsuario($_SESSION['ID']);
 
-            //$nuevosPuntos mirar de AÑADIRLO A UTILS DE CALCULADORA PRECIO
-            $nuevosPuntos = $puntosActuales + $puntosAgregar;
-            UsuarioDAO::actualizarPuntos($_SESSION['ID'], $nuevosPuntos);
+        // Tasa de puntos para el descuento (0.5 indica la mitad del valor del pedido en puntos).
+        $tasaPuntos = 0.5;
 
-            $UltimoInsertID = ProductoDAO::finalizarPedido($ID_user, $fechaSQL, $estado, $_SESSION['selecciones'], $total);
-            //Guardo la cookie
-            setcookie("Ultimopedido",$UltimoInsertID,time()+3600);
-            setcookie("ID",$_SESSION['ID'],time()+3600);
-
-            //Borramos sesion de pedido
-            unset($_SESSION['selecciones']);
-
-            //Redirigimos a la pagina principal
-            header("Location:".url.'?controller=producto');
-            
-        }else{
-            header("Location:".url.'?controller=usuario&action=session');
+        // Se verifica si se ha enviado el precio con descuento a través de POST.
+        if(isset($_POST['precioConDescuento'])){
+            $total = $_POST['precioConDescuento'];
+        } else {
+            // Puedes agregar un manejo adicional en caso de que el precio con descuento no esté presente.
+            // Por ejemplo, podrías redirigir o mostrar un mensaje de error.
         }
-        
+
+        // Se verifica si se ha aplicado el descuento (valor 1 indica que se ha aplicado).
+        if(isset($_POST['descuentoAplicado']) == 1){
+            // Se calculan los nuevos puntos con descuento aplicado.
+            $nuevosPuntos = round($total * $tasaPuntos);
+        } else {
+            // Se calculan los puntos a agregar sin descuento aplicado.
+            $puntosAgregar = round($total * $tasaPuntos);
+            $nuevosPuntos = $puntosActuales + $puntosAgregar;
+        }
+
+        // Se actualizan los puntos del usuario en la base de datos.
+        UsuarioDAO::actualizarPuntos($_SESSION['ID'], $nuevosPuntos);
+
+        // Se finaliza el pedido y se obtiene el ID del último pedido insertado en la base de datos.
+        $UltimoInsertID = ProductoDAO::finalizarPedido($ID_user, $fechaSQL, $estado, $_SESSION['selecciones'], $total);
+
+        // Se guardan cookies con información del último pedido y el ID del usuario.
+        setcookie("Ultimopedido", $UltimoInsertID, time()+3600);
+        setcookie("ID", $_SESSION['ID'], time()+3600);
+
+        // Se borra la sesión de selecciones (productos en el carrito).
+        unset($_SESSION['selecciones']);
+
+        // Se redirige a la página principal de productos.
+        header("Location:" . url . '?controller=producto');
+    } else {
+        // Si no se cumple alguna de las condiciones, se redirige a la página de inicio de sesión.
+        header("Location:" . url . '?controller=usuario&action=session');
     }
+}
+
 
     public function VerDetallesPedido(){
         $nombre = "Detalle del Pedido";

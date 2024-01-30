@@ -120,7 +120,8 @@
             <div class="col-12">
               <div class="btn-ver-cesta text-center">
                 <form action=<?="?controller=producto&action=confirmar&estado=finalizado"?> method="POST">
-                  <input type="hidden" name="cantidadFinal" value=<?=calculadoraPrecios::calculadorTotalPedido($_SESSION['selecciones'])?>>
+                  <input type="hidden" id="precioConDescuento" name="precioConDescuento" value="<?= calculadoraPrecios::calculadorTotalPedido($_SESSION['selecciones']) ?>">
+                  <input type="hidden" id="descuentoAplicado" name="descuentoAplicado" value="0">
                   <button type="submit" class="btn button-finalizar">FINALIZAR</button>
                 </form>
               </div>
