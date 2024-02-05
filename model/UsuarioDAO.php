@@ -112,10 +112,10 @@ class UsuarioDAO{
         $result = $stmt->get_result();
     
         // Realizar fetch_assoc para obtener la fila asociativa
-        $puntosDisponiblesRow = $result->fetch_assoc();
+        $row = $result->fetch_assoc();
     
         // Extraer el valor de la fila
-        $puntosDisponibles = $puntosDisponiblesRow['puntos'];
+        $puntosDisponibles = $row['puntos'];
     
         // Cerrar la conexión y devolver el valor
         $stmt->close();

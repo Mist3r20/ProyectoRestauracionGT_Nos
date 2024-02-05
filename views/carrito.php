@@ -93,16 +93,27 @@
           </div>
           <div class="row carrito-descuento">
             <div class="col-8 text-right">
-                <span>Descuento con puntos:</span>
+              <span>Descuento con puntos:</span>
             </div>
             <div class="col-4 text-right">
               <input type="checkbox" id="aplicarDescuento">
-              
             </div>
           </div>
           <div id="puntosUsuario">
-              
+            <!-- Mostrará los puntos disponibles del usuario -->
           </div>
+          <div id="descuentoSection" style="display: none;">
+            
+            
+          </div>
+          <div class="row carrito-puntos-ganados">
+              <div class="col-8 text-right">
+                <span id="puntosGanados"></span>
+              </div>
+              <div class="col-4 text-right" id="puntosGanados">
+                <!-- Se actualizará dinámicamente con JavaScript -->
+              </div>
+            </div>
           <div class="row">
             <div class="col-12">
               <div class="linea-separatoria-negra"></div>

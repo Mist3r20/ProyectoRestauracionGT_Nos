@@ -1,5 +1,5 @@
-document.addEventListener('DOMContentLoaded', function(){
-    fetch('http://testnos.com/index.php/?controller=api&action=api',{
+document.addEventListener('DOMContentLoaded', function () {
+    fetch('http://testnos.com/index.php/?controller=api&action=api', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -8,32 +8,47 @@ document.addEventListener('DOMContentLoaded', function(){
             accion: 'mostrarPuntos'
         }),
     }).then(response => response.json())
-    .then(data => {
-        mostrarPuntos(data);
+        .then(data => {
+            mostrarPuntosActuales(data);
 
-        let checkboxDescuento = document.getElementById('aplicarDescuento');
-        let puntosDisponibles = parseFloat(data);
-        let precioFinal = document.getElementById('precioFinal');
-        let precioConDescuento = document.getElementById('precioConDescuento');
-        let descuentoAplicado = document.getElementById('descuentoAplicado');
+            let checkboxDescuento = document.getElementById('aplicarDescuento');
+            let precioFinal = document.getElementById('precioFinal');
+            let precioConDescuento = document.getElementById('precioConDescuento');
+            let descuentoAplicado = document.getElementById('descuentoAplicado');
+            let precioInicial = parseFloat(precioFinal.getAttribute('data-precio')); // Guardar el precio inicial sin descuento
+            let maxPuntosUsuario = parseInt(data); // Obtener el máximo de puntos disponibles
+            let descuentoSection = document.getElementById('descuentoSection');
 
-        // Obtener el precio redondeado inicial para evitar que en el calculo no aparezcan numeros periodicos
-        let precioRedondeado = Math.floor(parseFloat(precioFinal.getAttribute('data-precio')));
+            // Después de obtener descuentoSection en tu código JavaScript
+            descuentoSection.innerHTML = `
+            <label for="cantidadPuntos">Cantidad de puntos a usar:</label>
+            <input type="number" id="cantidadPuntos" name="cantidadPuntos" min="0" max="${maxPuntosUsuario}">
+            `;
 
-        // Actualizar el precio inicial
-        actualizarPrecio(checkboxDescuento, puntosDisponibles, precioFinal, precioConDescuento, descuentoAplicado, precioRedondeado);
+            checkboxDescuento.addEventListener('change', function () {
+                // Mostrar u ocultar la sección de descuento
+                descuentoSection.style.display = checkboxDescuento.checked ? 'block' : 'none';
 
-        checkboxDescuento.addEventListener('change', function(){
-            actualizarPrecio(checkboxDescuento, puntosDisponibles, precioFinal, precioConDescuento, descuentoAplicado, precioRedondeado);
+                // Llama a la función actualizarPrecio cuando cambia el checkbox
+                actualizarPrecio(checkboxDescuento, precioFinal, precioConDescuento, descuentoAplicado, precioInicial, maxPuntosUsuario);
+            });
+
+            let puntosDisponibles = document.getElementById('cantidadPuntos');
+            puntosDisponibles.addEventListener('input', function () {
+                // Llama a la función actualizarPrecio cuando hay un cambio en el input
+                actualizarPrecio(checkboxDescuento, precioFinal, precioConDescuento, descuentoAplicado, precioInicial, maxPuntosUsuario);
+            });
+
+            // Ajustar el valor inicial del campo de puntos
+            puntosDisponibles.value = Math.min(maxPuntosUsuario, puntosDisponibles.value);
+            actualizarPrecio(checkboxDescuento, precioFinal, precioConDescuento, descuentoAplicado, precioInicial, maxPuntosUsuario);
+        })
+        .catch(error => {
+            console.log(error);
         });
-    })
-    .catch(error => {
-        console.log(error);
-    });
-
 });
 
-function mostrarPuntos(data){
+function mostrarPuntosActuales(data) {
     let puntos = document.getElementById('puntosUsuario');
 
     // Limpiar contenido previo
@@ -44,36 +59,39 @@ function mostrarPuntos(data){
     puntos.appendChild(mostrarPuntos);
 }
 
-function actualizarPrecio(checkboxDescuento, puntosDisponibles, precioFinal, precioConDescuento, descuentoAplicado, precioRedondeado){
-    let precioTotal = parseFloat(precioRedondeado);
+function actualizarPrecio(checkboxDescuento, precioFinal, precioConDescuento, descuentoAplicado, precioInicial) {
+    let precioTotal = parseFloat(precioInicial); // Utilizar el precio inicial sin descuento
 
-    if (checkboxDescuento.checked){
+
+    // Lógica para calcular los puntos independientemente del descuento aplicado
+    let tasaPuntosGanados = 0.5;
+    let puntosGanados = Math.round(precioTotal * tasaPuntosGanados);
+
+    // Actualizar el campo oculto con los puntos ganados
+    puntosGanados = isNaN(puntosGanados) ? 0 : puntosGanados;
+    document.getElementById('puntosGanados').textContent = `Puntos ganados: ${puntosGanados}`;
+
+    if (checkboxDescuento.checked) {
+        let puntosDisponibles = document.getElementById('cantidadPuntos').value;
         let tasaDescuento = 0.1;
         let descuento = puntosDisponibles * tasaDescuento;
-        
+
         // Aplicar el descuento solo si hay puntos suficientes
-        if (descuento <= precioTotal) {
-            precioTotal -= descuento;
 
-            // Actualizar el campo oculto con el nuevo precio
-            precioConDescuento.value = precioTotal.toFixed(2);
+        precioTotal -= descuento;
 
-            // Indicar que se ha aplicado el descuento
-            descuentoAplicado.value = "1";
-        } else {
-            // Si no hay puntos suficientes, desmarcar la casilla
-            checkboxDescuento.checked = false;
+        // Actualizar el campo oculto con el nuevo precio
+        precioConDescuento.value = precioTotal.toFixed(2);
 
-            // Restablecer los valores
-            precioConDescuento.value = precioTotal.toFixed(2);
-            descuentoAplicado.value = "0";
-        }
+        // Indicar que se ha aplicado el descuento
+        descuentoAplicado.value = puntosDisponibles;
+
     } else {
         // Si no se aplica el descuento, resetear el campo oculto y la indicación
-        precioConDescuento.value = precioTotal.toFixed(2);
+        precioConDescuento.textContent = precioTotal.toFixed(2);
         descuentoAplicado.value = "0";
     }
 
     // Actualizar el precio visible en la interfaz
-    precioFinal.textContent = precioTotal.toFixed(2);
+    precioFinal.textContent = precioTotal.toFixed(2) + ' €';
 }

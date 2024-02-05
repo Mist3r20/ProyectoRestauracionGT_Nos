@@ -283,20 +283,22 @@ public function confirmar(){
         // Se verifica si se ha enviado el precio con descuento a través de POST.
         if(isset($_POST['precioConDescuento'])){
             $total = $_POST['precioConDescuento'];
-        } else {
-            // Puedes agregar un manejo adicional en caso de que el precio con descuento no esté presente.
-            // Por ejemplo, podrías redirigir o mostrar un mensaje de error.
-        }
+        } 
 
         // Se verifica si se ha aplicado el descuento (valor 1 indica que se ha aplicado).
-        if(isset($_POST['descuentoAplicado']) == 1){
+        if(isset($_POST['descuentoAplicado']) && intval($_POST['descuentoAplicado']) >= 1){
+            $puntosAplicados = intval($_POST['descuentoAplicado']);
             // Se calculan los nuevos puntos con descuento aplicado.
-            $nuevosPuntos = round($total * $tasaPuntos);
+            $ganarPuntos = round($total * $tasaPuntos);
+            $puntosActuales -= $puntosAplicados;
+        
+            $nuevosPuntos = $puntosActuales + $ganarPuntos;
         } else {
             // Se calculan los puntos a agregar sin descuento aplicado.
             $puntosAgregar = round($total * $tasaPuntos);
             $nuevosPuntos = $puntosActuales + $puntosAgregar;
         }
+        
 
         // Se actualizan los puntos del usuario en la base de datos.
         UsuarioDAO::actualizarPuntos($_SESSION['ID'], $nuevosPuntos);
