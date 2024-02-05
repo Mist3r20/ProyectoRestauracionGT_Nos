@@ -10,7 +10,7 @@
     <title>Comentarios</title>
 </head>
 <body>
-    <script src="../assets/js/Comentarios.js"></script>
+    
 
     <div class="container">
         <div class="seccionesMAX1">
@@ -39,5 +39,7 @@
             </div>
         </div>
     </div>
+
+    <script src="../assets/js/Comentarios.js"></script>
 </body>
 </html>

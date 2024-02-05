@@ -666,6 +666,12 @@ p > span{
     font-weight: bold;
     font-size: 16px;
 }
+.oval-checkboxes {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
 
 /**CARRITO*/
 
