@@ -38,12 +38,14 @@
                 <div class="row linea-separatoria2">
                   <div class="col-6">
                     <p class="nombre-producto"><?=$pedido->getProducto()->getNombre()?> <?=$ml?></p>
-                  </div>
-                  <div class="col-4 d-flex justify-content-center">
                     <p class="nombre-producto">Cantidad: <?=$pedido->getCantidad()?></p>
                   </div>
+                  <div class="col-4 d-flex justify-content-center">
+                  <p class="nombre-producto">Puntos Utilizados: <?=$pedido->getPuntosUsados()?></p>
+                  <p class="nombre-producto">Propina: <?=$pedido->getPorcentajeAplicado()?>% (<?=$pedido->getPropinaAplicada()?>€)</p>
+                  </div>
                   <div class="col-2 text-right">
-                    <p class="nombre-producto"><?= number_format($pedido->devuelvePrecio(),2)?>€</p>
+                    <p class="nombre-producto">TOTAL: <?= number_format($pedido->devuelvePrecio(),2)?>€</p>
                   </div>
                 </div>
               </div>

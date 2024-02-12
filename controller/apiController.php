@@ -7,10 +7,12 @@ include_once 'model/ComentariosDAO.php';
 include 'utils/session_init.php';
 
 
-class APIController{
-    public function api(){
-        
-        if($_POST["accion"] == 'buscar_review'){
+class APIController
+{
+    public function api()
+    {
+
+        if ($_POST["accion"] == 'buscar_review') {
             $comentarios = ComentariosDAO::getComentarios();
 
             // Transformar objetos Comentario a arrays asociativos
@@ -26,11 +28,10 @@ class APIController{
 
             echo json_encode($comentariosArray, JSON_UNESCAPED_UNICODE);
             return;
-            
-        }elseif($_POST["accion"] == 'agregarComentario'){
-            
+        } elseif ($_POST["accion"] == 'agregarComentario') {
+
             $userID = $_SESSION['ID'];
-            
+
             $comentario = $_POST['comentario'];
             $puntuacion = $_POST['puntuacion'];
             $id_pedido = $_POST['idPedido'];
@@ -38,23 +39,21 @@ class APIController{
 
             echo json_encode($insertarCom, JSON_UNESCAPED_UNICODE);
 
-        }elseif($_POST["accion"] == 'mostrarBoton'){
-            $idPedido = $_POST["id"]; 
+        } elseif ($_POST["accion"] == 'mostrarBoton') {
+            $idPedido = $_POST["id"];
             $tieneComentario = ComentariosDAO::getComentariosByPedido($idPedido);
-            
+
 
             echo json_encode($tieneComentario, JSON_UNESCAPED_UNICODE);
             return;
-        }elseif($_POST["accion"] == 'mostrarPuntos'){
+
+        } elseif ($_POST["accion"] == 'mostrarPuntos') {
             $idUser = $_SESSION["ID"];
             $puntos = UsuarioDAO::obtenerPuntosDisponiblesUsuario($idUser);
 
             echo json_encode($puntos, JSON_UNESCAPED_UNICODE);
             return;
+
         }
-      
     }
 }
-
-
-?>
