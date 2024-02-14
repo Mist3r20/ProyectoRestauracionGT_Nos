@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
+  let idUser = document.getElementById('ID').ariaValueMax;
   document.getElementById('btnFinalizar').addEventListener('click', function (event) {
 
     // Obtén el contenido que deseas en el código QR (en este caso, la URL)
-    const url = 'http://testnos.com/index.php/?controller=producto&action=PaginaDetallesPedidoQR';
+    const url = 'http://testnos.com/index.php/?controller=producto&action=PaginaDetallesPedidoQR&ID='+idUser;
 
     // Genera el código QR en una nueva instancia de QRCode
     const qr = new QRCode(document.createElement('div'), {

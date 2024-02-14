@@ -106,8 +106,9 @@
             <section class="lista-cartas row" id="productosSection">
               <?php
               foreach ($allProducts as $producto) {
+                $clase = $producto->getNombre_categoria();
               ?>
-                <article class="carta col-12 col-lg-3 mb-2 productos" data-categoria="<?= $producto->getNombre_categoria() ?>">
+                <article class="carta col-12 col-lg-3 mb-2 productos <?php echo $clase?>" data-categoria="<?= $producto->getNombre_categoria() ?>">
                   <div class="imagen-carta">
                     <img class="imagen" src="data:image/jpeg; base64,<?= base64_encode($producto->getFoto()) ?>" alt="<?= $producto->getDescripcion() ?>">
                   </div>
