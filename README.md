@@ -1,8 +1,26 @@
+# Projecte JavaScript
+
+# Descripción del proyecto
+
+Proyecto el cual añade nuevas funcionalidades web creadas con JS al proyecto 1 del curso con HTML, CSS y PHP
+
+- [API](#API)
+- [COMENTARIOS](#Comentarios)
+- [AÑADIR COMENTARIO](#Añadir-comentario)
+- [FORMULARIO](#Formulario)
+- [DESCUENTO Y PROPINA](#Descuento-y-propina)
+- [FILTRO PRODUCTOS](#Filtro-productos)
+- [MOSTRAR QR](#Mostrar-QR)
+- [ERRORES ENCONTRADOS](#Errores-encontrados)
+
+## API
+
 <img width="383" alt="image" src="https://github.com/Mist3r20/ProyectoRestauracionGT_Nos/assets/148121356/ac79eb09-4d0a-4307-8103-069c0cbcd435">
 <img width="471" alt="image" src="https://github.com/Mist3r20/ProyectoRestauracionGT_Nos/assets/148121356/11700527-c29b-4293-b9cd-44981a6d7529">
+
 Archivo de la API con el cual interactua tanto con el JavaScript como con la BBDD para poder pasar informacion y poder mostrarla al usuario.
 
-COMENTARIOS:
+## Comentarios
 
 <img width="492" alt="image" src="https://github.com/Mist3r20/ProyectoRestauracionGT_Nos/assets/148121356/dd8864f1-56e7-4758-8483-9968e7d4e6b7">
 
@@ -37,7 +55,8 @@ usuario ha escogido en la pagina. "aplicarFiltro()" es la funcion que controla l
 La funcion de flecha "generarEstrellas()" es la que controla el mostrar la puntuacion en forma de estrella, pasandole la puntuacion del comentario y haciendo un bucle con .repeat() en funcion de la cantidad.
 
 
-BOTON AÑADIR COMENTARIO:
+## Añadir comentario
+
 En este JS controlaremos el mostrar en los pedidos si ya se ha añadido un comentario o no.
 
 
@@ -49,7 +68,8 @@ En este archivo JS controlamos el mostrar o esconder el boton para añadir comen
 para validar si hay o no un ID de comentario relacionado en el ID del pedido para poder entonces esconder uno u otro boton que controlamos con el .remove() del querySelector del boton que hemos añadido en la vista.
 
 
-FORMULARIO COMENTARIOS:
+## Formulario
+
 En este JS recogeremos todos los datos que el usuario especifica en el formulario para añadir un comentario en el pedido.
 
 
@@ -61,7 +81,8 @@ Tenemos un fetch que lo usaremos para pasarle todos los datos que hemos añadido
 
 
 
-DESCUENTO Y PROPINA
+## Descuento y propina
+
 En este JS se ha tenido que fusionar dos funcionalidades en un unico archivo para poder usar variables y poder hacer que los valores tanto de un lugar se actualicen como deberian y poder usar las dos funcionalidades a la vez y que no haya errores.
 
 
@@ -85,18 +106,19 @@ Tendremos diferentes comparaciones y comprobaciones para tener controlado el uso
 
 <img width="329" alt="image" src="https://github.com/Mist3r20/ProyectoRestauracionGT_Nos/assets/148121356/77b5294f-836c-4351-8d1b-b7343847ad86">
 
-Funcion que usamos para mostrar los puntos del usuario que hemos recogido por la API
+Funcion que usamos para mostrar los puntos del usuario que hemos recogido por la API.
 
 
 <img width="488" alt="image" src="https://github.com/Mist3r20/ProyectoRestauracionGT_Nos/assets/148121356/6dc94dab-83e5-424f-b102-652fe312f74a">
 
 
 
-Esta funcion actulizarPrecio() es la encargada de controlar y actualizar el precio del pedido cada vez que se cambia un valor en el carrito ya sea de propina o de puntos de descuento, ademas de dejar varios registros y valores para su uso posterior en el PHP.
+Esta funcion actualizarPrecio() es la encargada de controlar y actualizar el precio del pedido cada vez que se cambia un valor en el carrito ya sea de propina o de puntos de descuento, ademas de dejar varios registros y valores para su uso posterior en el PHP.
 
 
-FILTRO PRODUCTOS:
-En este JS controlaremos que el usuario pueda filtrar los productos del carrito por categorias
+## Filtro productos
+
+En este JS controlaremos que el usuario pueda filtrar los productos del carrito por categorias.
 
 
 
@@ -109,14 +131,20 @@ Esta es una parte del codigo JS en el cual cogemos varios valores para poder hac
 
 
 
-MOSTRAR QR:
+## Mostrar QR
 
-En este JS haremos que cada vez que el usuario finalice el pedido le aparezca en una ventana un pop-up con un QR en el cual podra ver los detalles del pedido que ha realizado
+En este JS haremos que cada vez que el usuario finalice el pedido le aparezca en un pop-up con un QR en el cual podra ver los detalles del pedido que ha realizado y cuando el usuario cierre el pop-up sea redireccionado como deberia.
 
-<img width="420" alt="image" src="https://github.com/Mist3r20/ProyectoRestauracionGT_Nos/assets/148121356/75462068-5207-4026-87bd-73f4d7108837">
+<img width="557" alt="image" src="https://github.com/Mist3r20/ProyectoRestauracionGT_Nos/assets/148121356/67ded5b1-3ca1-453a-853b-6ab103734f09">
 
-Para ello hemos agregado una libreria de QR para poder generarlo
 
+Para ello hemos agregado una libreria de QR para poder generarlo y sacarlo con sweetAlert.
+
+
+
+## Errores encontrados
+
+Durante la realizacion del proyecto me he ido encontrando una gran variedad de errores, he estado tiempo pensando y arreglando problemas con la API y el fetch intentando hacer que los datos se pasaran y se recogieran correctamente, tambien he tenido que lidiar con errores al mostrar los comentarios, tambien he tenido muchos problemas con el formulario ya que no era capaz de pasar el formato de dato correcto, con el descuento y la propina estuve muchisimo tiempo ya que era algo que tuve que darle mas vueltas y me costo encontrar la forma de actualizar los datos cada vez que actualizaba un input tambien como podia volver al valor inicial si reseteaba los input teniendo que guardar muchas variables y por ultimo donde encontre muchos problemas ha sido en el QR descubrir como hacerlo, ser capaz de mostrar un QR como es debido usando la libreria, luego intentar añadirlo con un pop-up haciendo que no se redireccione antes de que el usuario cierre el pop-up ademas de todo el tema del QR para poder pasarle la ID del usuario y luego poder mostrar los datos.
 
 
 
