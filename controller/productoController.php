@@ -95,8 +95,7 @@ class productoController
     public function carrito()
     {
         $nombre = "Carrito";
-		// Se obtiene el ID de usuario de la sesión actual.
-        $ID_user = $_SESSION['ID'];
+
 
         if (isset($_GET['recuperar'])) {
             $recuperar = ProductoDAO::getProductoByPedido($_COOKIE['Ultimopedido']);

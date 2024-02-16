@@ -150,7 +150,6 @@
                   <input type="hidden" id="descuentoAplicado" name="descuentoAplicado" value="0">
                   <input type="hidden" id="propinaAplicada" name="propinaAplicada" value="0">
                   <input type="hidden" id="porcentajeAplicado" name="porcentajeAplicado" value="0">
-					<input type="hidden" id="ID" value="<?=$ID_user?>">
                   <button type="submit" class="btn button-finalizar" id="btnFinalizar">FINALIZAR</button>
                 </form>
               </div>
