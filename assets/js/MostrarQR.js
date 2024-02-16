@@ -1,31 +1,48 @@
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('btnFinalizar').addEventListener('click', function (event) {
+document.addEventListener('DOMContentLoaded', function(){
+  const checkForm = document.getElementById('enviarForm');
 
-    // Obtén el contenido que deseas en el código QR (en este caso, la URL)
-    const url = 'http://testnos.com/index.php/?controller=producto&action=PaginaDetallesPedidoQR';
+  checkForm.addEventListener('submit', function(event){
+    event.preventDefault();
 
-    // Genera el código QR en una nueva instancia de QRCode
-    const qr = new QRCode(document.createElement('div'), {
-      text: url,
-      width: 300,
-      height: 300,
+    const formData = new FormData(checkForm);
+
+    fetch(checkForm.action, {
+      method: checkForm.method,
+      body: formData
+    })
+    .then(response =>{
+      if(!response.ok){
+        throw new Error('Error al enviar el formulario');
+      }
+      return response.json();
+    })
+    .then(data =>{
+      let idUser = document.getElementById('ID').value;
+      const url = 'https://edgarnos.bernat2024.es/index.php/?controller=producto&action=PaginaDetallesPedidoQR&ID='+idUser;
+      
+      const qr = new QRCode(document.createElement('div'), {
+        text: url,
+        width: 300,
+        height: 300,
+      });
+      const canvas = qr._canvas;  
+
+    const qrCodeDataUrl = canvas.toDataURL();
+
+      Swal.fire({
+        title: 'QR Detalles del Pedido',
+        imageUrl: qrCodeDataUrl,
+        imageAlt: 'Código QR',
+        showCancelButton: false,
+        showConfirmButton: false,
+        showCloseButton: true,
+        allowOutsideClick: false
+    }).then(()=>{
+      window.location.href = 'https://edgarnos.bernat2024.es/index.php';
     });
-
-    // Crea una nueva ventana emergente con estilos y muestra el código QR
-    const qrWindow = window.open('', 'Código QR', 'width=400,height=400');
-    qrWindow.document.body.style.backgroundColor = '#f0f0f0';
-    qrWindow.document.body.style.textAlign = 'center';
-
-    // Agrega contenido personalizado a la ventana emergente
-    qrWindow.document.body.innerHTML = `
-      <h2 style="color: #333;">Código QR Generado</h2>
-      <p>Escanea el código QR con tu dispositivo</p>
-    `;
-
-    // Agrega el código QR al contenido de la ventana emergente
-    qrWindow.document.body.appendChild(qr._el);
-
+    }).catch(error =>{
+      console.error(error);
+    });
   });
+
 });
-
-

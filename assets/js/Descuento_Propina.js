@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener información de puntos disponibles mediante una llamada a la API
-    fetch('http://testnos.com/index.php/?controller=api&action=api', {
+    fetch('https://edgarnos.bernat2024.es/index.php/?controller=api&action=api', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

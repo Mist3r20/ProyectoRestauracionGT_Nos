@@ -145,11 +145,12 @@
           <div class="row">
             <div class="col-12">
               <div class="btn-ver-cesta text-center">
-                <form action=<?= "?controller=producto&action=confirmar&estado=finalizado" ?> method="POST">
+                <form action=<?= "?controller=producto&action=confirmar&estado=finalizado" ?> method="POST" id="enviarForm">
                   <input type="hidden" id="precioConDescuento" name="precioConDescuento" value="<?= calculadoraPrecios::calculadorTotalPedido($_SESSION['selecciones']) ?>">
                   <input type="hidden" id="descuentoAplicado" name="descuentoAplicado" value="0">
                   <input type="hidden" id="propinaAplicada" name="propinaAplicada" value="0">
                   <input type="hidden" id="porcentajeAplicado" name="porcentajeAplicado" value="0">
+					<input type="hidden" id="ID" value="<?=$ID_user?>">
                   <button type="submit" class="btn button-finalizar" id="btnFinalizar">FINALIZAR</button>
                 </form>
               </div>
@@ -162,7 +163,6 @@
 
   <script src="../assets/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/js/Descuento_Propina.js"></script>
-  <script src="../assets/QR/qrcode.min.js"></script>
   <script src="../assets/js/MostrarQR.js"></script>
 
 

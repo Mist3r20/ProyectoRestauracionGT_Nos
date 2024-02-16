@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
     BotonAddComentarios.forEach(boton => {
          let idPedido = boton.getAttribute('data-pedido-id');
          
-         fetch('http://testnos.com/index.php/?controller=api&action=api', {
+         fetch('https://edgarnos.bernat2024.es/index.php/?controller=api&action=api', {
              method: 'POST',
              headers: {
                  'Content-Type': 'application/x-www-form-urlencoded',

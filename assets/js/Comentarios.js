@@ -1,7 +1,7 @@
 // Espera a que el DOM esté completamente cargado antes de ejecutar el código
 document.addEventListener('DOMContentLoaded', function () {
     // Realiza una solicitud fetch a la API para obtener datos de comentarios
-    fetch('http://testnos.com/index.php/?controller=api&action=api', {
+    fetch('https://edgarnos.bernat2024.es/index.php/?controller=api&action=api', {
         method: 'POST', // Método HTTP POST utilizado para enviar datos al servidor
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded', // Tipo de contenido de la solicitud

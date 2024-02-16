@@ -59,7 +59,7 @@
           <p class="nombre-producto">Puntos Utilizados Total: <?= $pedido->getPuntosUsados() ?></p>
           <p class="nombre-producto">Propina: <?= $pedido->getPorcentajeAplicado() ?>% (<?= $pedido->getPropinaAplicada() ?>€)</p>
         </div>
-        <form action="?controller=usuario&action=pedidos" method="POST">
+        <form action="?controller=producto" method="POST">
           <button class="redirect-button">Volver Atrás</button>
         </form>
       </div>

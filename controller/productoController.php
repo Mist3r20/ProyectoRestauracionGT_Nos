@@ -95,7 +95,8 @@ class productoController
     public function carrito()
     {
         $nombre = "Carrito";
-
+		// Se obtiene el ID de usuario de la sesión actual.
+        $ID_user = $_SESSION['ID'];
 
         if (isset($_GET['recuperar'])) {
             $recuperar = ProductoDAO::getProductoByPedido($_COOKIE['Ultimopedido']);
@@ -141,9 +142,8 @@ class productoController
     //Funcion sel la cual sera la encargada de añadir el producto a la array de session
     public function sel()
     {
-
-
-        if (isset($_POST['ID'])) {
+		if(isset($_SESSION['ID'])){
+			if (isset($_POST['ID'])) {
             $productoId = $_POST['ID'];
             $encontrado = false;
 
@@ -176,6 +176,10 @@ class productoController
                 header("Location:" . url . '?controller=producto&action=index');
             }
         }
+		}else{
+			header("Location:" . url . '?controller=usuario&action=session');
+		}
+        
     }
 
     //funcion que se usara para eliminar un producto con el id
@@ -327,9 +331,12 @@ class productoController
             setcookie("Ultimopedido", $UltimoInsertID, time() + 3600);
             setcookie("ID", $_SESSION['ID'], time() + 3600);
 
-            unset($_SESSION['selecciones']);
+            echo json_encode(['success' => true]);
 
-            header("Location:" . url . '?controller=producto');
+            unset($_SESSION['selecciones']);
+            
+            exit();
+			
         } else {
             // Si no se cumple alguna de las condiciones, se redirige a la página de inicio de sesión.
             header("Location:" . url . '?controller=usuario&action=session');
@@ -354,7 +361,7 @@ class productoController
     public function PaginaDetallesPedidoQR()
     {
         $nombre = "Informacion del Pedido";
-        $ID_user = $_SESSION['ID'];
+        $ID_user = $_GET['ID'];
 
         $pedidos = ProductoDAO::getUltimoPedidoByUser($ID_user);
 
